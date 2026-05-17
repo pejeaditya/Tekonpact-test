@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.9rem;
+  --background: oklch(0.06 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.1 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.09 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.86 0.02 90);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.16 0 0);
+  --secondary-foreground: oklch(0.94 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --accent: oklch(0.66 0.11 73);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.16 0 0);
+  --ring: oklch(0.73 0.09 78);
+  --chart-1: oklch(0.76 0.13 73);
+  --chart-2: oklch(0.63 0.07 155);
+  --chart-3: oklch(0.55 0.05 250);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #050505;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(170, 125, 56, 0.16), transparent 34rem),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05), transparent 26rem),
+    #050505;
+  color: var(--foreground);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(213, 165, 86, 0.32);
+  color: white;
+}
+
+/* Infinite horizontal marquee for product screenshot decks */
+@keyframes teknopact-marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-teknopact-marquee {
+  animation: teknopact-marquee-x 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-teknopact-marquee {
+    animation: none;
+  }
+}
