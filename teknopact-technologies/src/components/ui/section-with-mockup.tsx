@@ -15,6 +15,8 @@ interface SectionWithMockupProps {
   reverseLayout?: boolean
   /** Narrow two-column cap so mockups fit beside sidebars / smaller viewports */
   embedded?: boolean
+  /** Center title, description, and tags in the text column (embedded product detail). */
+  embeddedCopyCentered?: boolean
   className?: string
 }
 
@@ -41,11 +43,14 @@ export default function SectionWithMockup({
   secondaryMockup,
   reverseLayout = false,
   embedded = false,
+  embeddedCopyCentered = false,
   className,
 }: SectionWithMockupProps) {
   const layoutClasses = reverseLayout ? "md:grid-cols-2 md:grid-flow-col-dense" : "md:grid-cols-2"
-  const embeddedLayoutClasses =
-    "lg:grid-cols-[minmax(0,1fr)_minmax(0,min(100%,26rem))] lg:items-start lg:gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,min(100%,28rem))]"
+  const embeddedLayoutClasses = cn(
+    "lg:grid-cols-[minmax(0,1fr)_minmax(0,min(100%,26rem))] lg:gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,min(100%,28rem))]",
+    embeddedCopyCentered ? "lg:items-center" : "lg:items-start"
+  )
   const textOrderClass = reverseLayout ? "md:col-start-2" : ""
   const imageOrderClass = reverseLayout ? "md:col-start-1" : ""
 
@@ -73,6 +78,9 @@ export default function SectionWithMockup({
             className={cn(
               "mx-auto flex min-w-0 max-w-[546px] flex-col items-start gap-4 md:mx-0",
               embedded && "max-w-none lg:max-w-[40rem]",
+              embedded &&
+                embeddedCopyCentered &&
+                "items-center text-center md:mx-auto lg:justify-self-center",
               textOrderClass
             )}
             variants={itemVariants}
@@ -86,7 +94,14 @@ export default function SectionWithMockup({
               {title}
             </h2>
 
-            <div className="text-sm leading-6 text-muted-foreground md:text-[15px]">{description}</div>
+            <div
+              className={cn(
+                "text-sm leading-6 text-muted-foreground md:text-[15px]",
+                embedded && embeddedCopyCentered && "flex w-full flex-col items-center"
+              )}
+            >
+              {description}
+            </div>
           </motion.div>
 
           <motion.div

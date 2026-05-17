@@ -27,7 +27,7 @@ import {
   steps,
   testimonial,
 } from "@/lib/content"
-import type { ProductCluster } from "@/lib/content"
+import type { ProductCluster, ProductShowcaseSlide } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
 const customerTestimonials = [
@@ -87,54 +87,53 @@ const customerTestimonials = [
   },
 ]
 
-function HorizontalImageDeck({
-  images,
-  className,
-  compact,
-}: {
-  images: string[]
-  className?: string
-  compact?: boolean
-}) {
-  if (images.length === 0) return null
-  const looped = [...images, ...images]
+function ProductShowcaseGallery({ slides }: { slides: ProductShowcaseSlide[] }) {
+  if (slides.length === 0) return null
+  const looped = [...slides, ...slides]
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-2xl border border-white/10 bg-black/30",
-        className
-      )}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent sm:w-10"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:w-10"
-      />
-      <div
-        className={cn(
-          "flex w-max animate-teknopact-marquee hover:[animation-play-state:paused]",
-          compact ? "gap-2 py-1.5 pl-1.5 pr-1.5" : "gap-2 py-2 pl-2 pr-2 sm:gap-3 sm:py-3 sm:pl-3 sm:pr-3"
-        )}
-      >
-        {looped.map((src, index) => (
-          <img
-            key={`${src}-${index}`}
-            src={src}
-            alt=""
-            className={cn(
-              "shrink-0 rounded-lg object-cover ring-1 ring-white/10",
-              compact
-                ? "h-14 w-[5.5rem] sm:h-16 sm:w-24"
-                : "h-24 w-[11.5rem] sm:h-28 sm:w-44"
-            )}
-            loading="lazy"
-          />
+    <div className="space-y-4">
+      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent sm:w-10"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:w-10"
+        />
+        <div className="flex w-max animate-teknopact-marquee gap-2 py-2 pl-2 pr-2 hover:[animation-play-state:paused] sm:gap-3 sm:py-3 sm:pl-3 sm:pr-3">
+          {looped.map((slide, index) => (
+            <img
+              key={`${slide.src}-${slide.label}-${index}`}
+              src={slide.src}
+              alt={slide.label}
+              className="h-24 w-[11.5rem] shrink-0 rounded-lg object-cover ring-1 ring-white/10 sm:h-28 sm:w-44"
+              loading="lazy"
+            />
+          ))}
+        </div>
+        <p className="sr-only">Product interface samples scrolling horizontally</p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {slides.map((slide, i) => (
+          <figure
+            key={`${slide.label}-${i}`}
+            className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-lg shadow-black/30"
+          >
+            <div className="relative aspect-[16/10] w-full bg-white/[0.04]">
+              <img
+                src={slide.src}
+                alt={slide.label}
+                className="absolute inset-0 h-full w-full object-cover object-top"
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="border-t border-white/10 px-3 py-2.5 text-xs font-medium leading-snug text-muted-foreground">
+              {slide.label}
+            </figcaption>
+          </figure>
         ))}
       </div>
-      <p className="sr-only">Placeholder product screenshots scrolling horizontally</p>
     </div>
   )
 }
@@ -283,8 +282,9 @@ export function ProductTabsSection() {
             Choose a cluster, then open the app you want to explore.
           </h2>
           <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
-            Education sector lists Intangible alongside five companion apps. Clusters on top scroll horizontally—use the
-            scrollbar or pause on hover—while each app shows a mockup and a slow filmstrip of placeholder screenshots.
+            Pick a cluster, then an app: each one opens the same gallery layout—a scrolling filmstrip plus a grid—with
+            stock photography everywhere except Intangible, which uses your real product shots from{" "}
+            <span className="text-white/80">public/intangible/</span>.
           </p>
         </div>
 
@@ -329,12 +329,13 @@ export function ProductTabsSection() {
           <div className="min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_15%_0%,rgba(213,165,86,0.22),transparent_28rem)]">
             <SectionWithMockup
               embedded
+              embeddedCopyCentered
               title={selectedSubProduct.title}
               description={
                 <>
                   <p>{selectedSubProduct.description}</p>
                   {selectedSubProduct.audiences?.length ? (
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-4 flex flex-wrap justify-center gap-2">
                       {selectedSubProduct.audiences.map((audience) => (
                         <Badge
                           key={audience}
@@ -348,11 +349,15 @@ export function ProductTabsSection() {
                   ) : null}
                 </>
               }
-              secondaryImageSrc={selectedSubProduct.deckImages[0]}
+              secondaryImageSrc={selectedSubProduct.showcaseSlides[0]?.src}
               mockup={
-                <div className="space-y-3 sm:space-y-4">
-                  <HorizontalImageDeck compact images={selectedSubProduct.deckImages} />
-                  <DashboardPreview variant={selectedSubProduct.dashboardVariant} compact />
+                <div
+                  className={cn(
+                    "max-h-[80vh] min-h-0 overflow-y-auto overflow-x-hidden overscroll-contain",
+                    "teknopact-scrollbar"
+                  )}
+                >
+                  <ProductShowcaseGallery slides={selectedSubProduct.showcaseSlides} />
                 </div>
               }
               className="bg-transparent px-3 py-6 sm:px-5 sm:py-7"

@@ -39,19 +39,110 @@ export const navLinks = [
   { label: "FAQ", href: "#faq" },
 ]
 
-/** Placeholder screenshots for horizontal “deck” under each product mockup */
-const stockScreens = {
-  dashboard: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
-  analytics: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
-  workspace: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
-  team: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80",
-  mobile: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80",
-  classroom: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80",
-  lecture: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80",
-  library: "https://images.unsplash.com/photo-1524996297572-7b3b4a5a8c9d?auto=format&fit=crop&w=900&q=80",
-  grad: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80",
-  code: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80",
-} as const
+export type ProductShowcaseSlide = {
+  src: string
+  label: string
+}
+
+/** Stock imagery for non-Intangible product galleries (Unsplash). */
+const SHOWCASE_STOCK_PHOTOS = [
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1542744173-8e7e5348bb0c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1481627834876-b7833add8c80?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80",
+] as const
+
+const STOCK_GALLERY_LABELS = [
+  "command overview",
+  "live metrics",
+  "workflow depth",
+  "team rhythm",
+  "mobile surface",
+  "analytics focus",
+  "ops cadence",
+  "strategy snapshot",
+  "signal landscape",
+  "delivery window",
+  "integration layer",
+] as const
+
+function buildStockShowcaseSlides(productTitle: string, rotation: number): ProductShowcaseSlide[] {
+  const pool = SHOWCASE_STOCK_PHOTOS as unknown as readonly string[]
+  return STOCK_GALLERY_LABELS.map((suffix, i) => ({
+    src: pool[(rotation + i) % pool.length]!,
+    label: `${productTitle} — ${suffix}`,
+  }))
+}
+
+export type IntangibleShowcaseSlide = {
+  /** Filename in `public/intangible/` (spaces allowed). */
+  file: string
+  label: string
+}
+
+export function intangiblePublicUrl(filename: string) {
+  return `/intangible/${encodeURIComponent(filename)}`
+}
+
+/** Intangible product UI — files live in `public/intangible/`. */
+export const intangibleShowcaseSlides: IntangibleShowcaseSlide[] = [
+  {
+    file: "Screenshot 2026-05-17 172801 - Copy.png",
+    label: "Professor Hub — department teaching dashboard",
+  },
+  {
+    file: "Screenshot 2026-05-17 172819 - Copy.png",
+    label: "Skills Passport — global readiness document",
+  },
+  {
+    file: "Screenshot 2026-05-17 172847 - Copy.png",
+    label: "Career path, certifications, and academic records",
+  },
+  {
+    file: "Screenshot 2026-05-17 172908 - Copy.png",
+    label: "Behavioral evidence and industry alignment",
+  },
+  {
+    file: "Screenshot 2026-05-17 172957 - Copy.png",
+    label: "Published papers and research summaries",
+  },
+  {
+    file: "Screenshot 2026-05-17 173056.png",
+    label: "Student projects — collaborators and files",
+  },
+  {
+    file: "Screenshot 2026-05-17 173145.png",
+    label: "AI assistants — assessment, lecture planning, research",
+  },
+  {
+    file: "Screenshot 2026-05-17 173210.png",
+    label: "Skills Passport — readiness gauge and technical skills",
+  },
+  {
+    file: "Screenshot 2026-05-17 173224.png",
+    label: "Core skills dimensions and peer endorsements",
+  },
+  {
+    file: "Screenshot 2026-05-17 173238.png",
+    label: "Communities — publication and peer-review network",
+  },
+  {
+    file: "Screenshot 2026-05-17 173252.png",
+    label: "Student home — campus feed and discovery",
+  },
+]
 
 export type ProductClusterSubItem = {
   id: string
@@ -62,7 +153,7 @@ export type ProductClusterSubItem = {
   dashboardVariant: string
   sector?: string
   audiences?: string[]
-  deckImages: string[]
+  showcaseSlides: ProductShowcaseSlide[]
 }
 
 export type ProductCluster = {
@@ -85,7 +176,7 @@ export const productClusters: ProductCluster[] = [
           "Turn scattered business signals into clear product and operational decisions with a unified signal workspace.",
         icon: BrainCircuit,
         dashboardVariant: "Intelligence",
-        deckImages: [stockScreens.dashboard, stockScreens.analytics, stockScreens.workspace, stockScreens.mobile],
+        showcaseSlides: buildStockShowcaseSlides("Intelligence", 0),
       },
     ],
   },
@@ -101,7 +192,7 @@ export const productClusters: ProductCluster[] = [
           "Create consistent product experiences with reusable components, tokens, and brand rules your teams can trust.",
         icon: Gem,
         dashboardVariant: "Design Systems",
-        deckImages: [stockScreens.workspace, stockScreens.team, stockScreens.mobile, stockScreens.dashboard],
+        showcaseSlides: buildStockShowcaseSlides("Design Systems", 2),
       },
     ],
   },
@@ -117,7 +208,7 @@ export const productClusters: ProductCluster[] = [
           "Remove repetitive work with reliable workflows, integrations, and internal tools that keep quality high.",
         icon: Bot,
         dashboardVariant: "Automation",
-        deckImages: [stockScreens.dashboard, stockScreens.analytics, stockScreens.workspace, stockScreens.code],
+        showcaseSlides: buildStockShowcaseSlides("Automation", 4),
       },
     ],
   },
@@ -133,7 +224,7 @@ export const productClusters: ProductCluster[] = [
           "Build cloud-ready foundations that support growth, resilience, and observability from the first deploy.",
         icon: DatabaseZap,
         dashboardVariant: "Infrastructure",
-        deckImages: [stockScreens.workspace, stockScreens.analytics, stockScreens.dashboard, stockScreens.team],
+        showcaseSlides: buildStockShowcaseSlides("Infrastructure", 6),
       },
     ],
   },
@@ -149,7 +240,7 @@ export const productClusters: ProductCluster[] = [
           "Improve performance, delivery velocity, and conversion with focused engineering and measurable experiments.",
         icon: Rocket,
         dashboardVariant: "Optimization",
-        deckImages: [stockScreens.analytics, stockScreens.dashboard, stockScreens.mobile, stockScreens.team],
+        showcaseSlides: buildStockShowcaseSlides("Optimization", 8),
       },
     ],
   },
@@ -167,7 +258,10 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Intangible",
         sector: "AI and Education",
         audiences: ["Students", "Colleges", "Professors", "Companies"],
-        deckImages: [stockScreens.classroom, stockScreens.lecture, stockScreens.library, stockScreens.mobile, stockScreens.team],
+        showcaseSlides: intangibleShowcaseSlides.map((slide) => ({
+          src: intangiblePublicUrl(slide.file),
+          label: slide.label,
+        })),
       },
       {
         id: "cognition-lab",
@@ -178,7 +272,7 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Cognition Lab",
         sector: "AI and Education",
         audiences: ["Students", "Professors"],
-        deckImages: [stockScreens.lecture, stockScreens.classroom, stockScreens.analytics, stockScreens.mobile],
+        showcaseSlides: buildStockShowcaseSlides("Cognition Lab", 1),
       },
       {
         id: "skill-atlas",
@@ -189,7 +283,7 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Skill Atlas",
         sector: "AI and Education",
         audiences: ["Colleges", "Companies"],
-        deckImages: [stockScreens.library, stockScreens.dashboard, stockScreens.classroom, stockScreens.team],
+        showcaseSlides: buildStockShowcaseSlides("Skill Atlas", 3),
       },
       {
         id: "mentorflow",
@@ -200,7 +294,7 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Mentorflow",
         sector: "AI and Education",
         audiences: ["Professors", "Students"],
-        deckImages: [stockScreens.team, stockScreens.classroom, stockScreens.mobile, stockScreens.workspace],
+        showcaseSlides: buildStockShowcaseSlides("Mentorflow", 5),
       },
       {
         id: "campus-bridge",
@@ -211,7 +305,7 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Campus Bridge",
         sector: "AI and Education",
         audiences: ["Colleges", "Students"],
-        deckImages: [stockScreens.workspace, stockScreens.dashboard, stockScreens.team, stockScreens.mobile],
+        showcaseSlides: buildStockShowcaseSlides("Campus Bridge", 7),
       },
       {
         id: "talent-synapse",
@@ -222,7 +316,7 @@ export const productClusters: ProductCluster[] = [
         dashboardVariant: "Talent Synapse",
         sector: "AI and Education",
         audiences: ["Companies", "Students", "Colleges"],
-        deckImages: [stockScreens.team, stockScreens.analytics, stockScreens.grad, stockScreens.workspace],
+        showcaseSlides: buildStockShowcaseSlides("Talent Synapse", 9),
       },
     ],
   },

@@ -111,3 +111,38 @@ a {
     animation: none;
   }
 }
+
+/* Slim scrollbars for embedded mockups (WebKit + Firefox) */
+.teknopact-scrollbar {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(213, 165, 86, 0.42) rgba(255, 255, 255, 0.06);
+}
+
+.teknopact-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.teknopact-scrollbar::-webkit-scrollbar-track {
+  margin-block: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 9999px;
+}
+
+.teknopact-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(213, 165, 86, 0.55), rgba(213, 165, 86, 0.22));
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  background-clip: padding-box;
+}
+
+.teknopact-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(230, 190, 120, 0.75), rgba(213, 165, 86, 0.4));
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.teknopact-scrollbar::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
