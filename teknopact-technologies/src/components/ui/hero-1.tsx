@@ -140,9 +140,21 @@ export function HeroLanding(props: HeroLandingProps) {
 
   return (
     <div className={cn("relative min-h-screen w-full overflow-hidden bg-background", className)}>
+      {/* Stronger bronze wash on small screens — clipped SVG-style blobs read mostly black on narrow viewports */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-0 min-h-screen transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        className="pointer-events-none absolute inset-0 -z-0 sm:hidden"
+        style={{
+          background: [
+            `radial-gradient(ellipse 110% 60% at 50% 8%, color-mix(in oklch, ${gradientColors?.from} 42%, transparent), transparent 58%)`,
+            `radial-gradient(ellipse 90% 55% at 50% 92%, color-mix(in oklch, ${gradientColors?.to} 32%, transparent), transparent 55%)`,
+          ].join(","),
+        }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 -top-28 -z-0 min-h-screen transform-gpu overflow-hidden blur-2xl sm:-top-80 sm:blur-3xl"
       >
         <div
           style={{
@@ -150,13 +162,13 @@ export function HeroLanding(props: HeroLandingProps) {
               "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
             background: `linear-gradient(to top right, ${gradientColors?.from}, ${gradientColors?.to})`,
           }}
-          className="relative left-[calc(50%-11rem)] aspect-[1155/678] min-h-screen w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+          className="relative left-1/2 aspect-[1155/678] w-[min(44rem,115vw)] max-w-none -translate-x-1/2 rotate-[26deg] opacity-50 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem] sm:rotate-[30deg] sm:opacity-30"
         />
       </div>
 
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-0 min-h-screen transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        className="absolute inset-x-0 top-[52%] -z-0 min-h-screen transform-gpu overflow-hidden blur-2xl sm:top-[calc(100%-30rem)] sm:blur-3xl"
       >
         <div
           style={{
@@ -164,7 +176,7 @@ export function HeroLanding(props: HeroLandingProps) {
               "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
             background: `linear-gradient(to top right, ${gradientColors?.from}, ${gradientColors?.to})`,
           }}
-          className="relative left-[calc(50%+3rem)] aspect-[1155/678] min-h-screen w-[36.125rem] max-w-none -translate-x-1/2 opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+          className="relative left-1/2 aspect-[1155/678] w-[min(40rem,105vw)] max-w-none -translate-x-1/2 rotate-[26deg] opacity-45 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem] sm:rotate-[30deg] sm:opacity-30"
         />
       </div>
 
