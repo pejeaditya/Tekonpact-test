@@ -4,8 +4,8 @@ import {
   FaqSection,
   FeaturesSection,
   HeroSection,
-  HowItWorksSection,
   ProductTabsSection,
+  TeamSection,
   TestimonialSection,
   TestimonialsColumnsSection,
   TrustedBySection,
@@ -21,7 +21,7 @@ export function HomePage() {
         <TrustedBySection />
         <FeaturesSection />
         <VideoSection />
-        <HowItWorksSection />
+        <TeamSection />
         <TestimonialSection />
         <TestimonialsColumnsSection />
         <BlogPreviewSection />

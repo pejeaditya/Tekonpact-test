@@ -1,47 +1,52 @@
-import { Globe2, Mail, MessageCircle, Send, Sparkles } from "lucide-react"
+import { Globe2, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { brand } from "@/lib/brand"
 import { company } from "@/lib/content"
 
 const footerLinks = [
-  { label: "About", href: "#features" },
-  { label: "Products", href: "#products" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Services", href: "#services" },
+  { label: "Presence", href: "#presence" },
+  { label: "Team", href: "#team" },
+  { label: "Case Studies", href: "#case-studies" },
 ]
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="relative overflow-hidden border-t border-white/10 bg-black">
+    <footer id="contact" className="relative overflow-hidden border-t border-border bg-card">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
-        <div className="rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_20%_20%,rgba(213,165,86,0.34),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] px-6 py-14 text-center shadow-2xl shadow-black/40 sm:px-10">
-          <p className="text-sm text-primary">Ready when your team is.</p>
-          <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
-            Step into the future with custom digital solutions.
+        <div className="rounded-[2rem] border border-border bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] px-6 py-14 text-center shadow-2xl shadow-black/40 sm:px-10">
+          <p className="text-sm text-primary">Thank you for visiting Teknopact</p>
+          <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Step into the future with intelligent IT solutions.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-white/70">
-            Tell us what you are building, automating, or improving. We will help you sort the tech and move with focus.
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-foreground/70">
+            {company.tagline} — let&apos;s discuss advisory, ERP, managed services, or digital transformation for your organization.
           </p>
-          <Button asChild className="mt-8 rounded-full bg-primary px-6 text-primary-foreground hover:bg-primary/90">
-            <a href={`mailto:${company.email}`}>Get Started</a>
-          </Button>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild className="rounded-full bg-primary px-6 text-primary-foreground hover:bg-primary/90">
+              <a href={`mailto:${company.email}`}>Email Us</a>
+            </Button>
+            <Button asChild variant="outline" className="rounded-full border-border bg-muted/60">
+              <a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a>
+            </Button>
+          </div>
         </div>
 
         <div className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <a href="#home" className="inline-flex items-center gap-2 font-semibold">
-              <span className="grid size-7 place-items-center rounded-full bg-primary text-primary-foreground">
-                <Sparkles className="size-4" />
-              </span>
-              {company.shortName}
+            <a href="#home" className="inline-flex flex-col gap-3">
+              <img
+                src={brand.logo.src}
+                alt={brand.logo.alt}
+                className="h-8 w-auto max-w-[12rem] object-contain object-left"
+              />
             </a>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
-              {company.description}
-            </p>
+            <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{company.description}</p>
             <div className="mt-6 flex gap-2">
               {[Globe2, MessageCircle, Send, Mail].map((Icon, index) => (
-                <Button key={index} variant="outline" size="icon" className="rounded-full border-white/10 bg-white/5">
+                <Button key={index} variant="outline" size="icon" className="rounded-full border-border bg-muted/60">
                   <Icon className="size-4" />
                 </Button>
               ))}
@@ -49,10 +54,10 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-white">Quick links</h3>
-            <div className="mt-4 grid gap-3">
+            <h3 className="text-sm font-medium text-foreground">Quick links</h3>
+            <div className="mt-4 flex flex-col gap-3">
               {footerLinks.map((link) => (
-                <a key={link.label} href={link.href} className="text-sm text-muted-foreground hover:text-white">
+                <a key={link.label} href={link.href} className="text-sm text-muted-foreground hover:text-foreground">
                   {link.label}
                 </a>
               ))}
@@ -60,12 +65,21 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-white">Address</h3>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">
-              {company.location}
-              <br />
-              {company.email}
-            </p>
+            <h3 className="text-sm font-medium text-foreground">Contact</h3>
+            <div className="mt-4 flex flex-col gap-3 text-sm leading-6 text-muted-foreground">
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="size-4 shrink-0 text-primary" />
+                {company.location}
+              </span>
+              <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2 hover:text-foreground">
+                <Mail className="size-4 shrink-0 text-primary" />
+                {company.email}
+              </a>
+              <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 hover:text-foreground">
+                <Phone className="size-4 shrink-0 text-primary" />
+                {company.phone}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -75,10 +89,10 @@ export function SiteFooter() {
             <a href="#home">Terms of Service</a>
             <a href="#home">Privacy Policy</a>
           </div>
-          <p>© 2026 {company.shortName}. All rights reserved.</p>
+          <p>© 2026 {company.name}. All rights reserved.</p>
         </div>
       </div>
-      <div className="pointer-events-none absolute -bottom-10 left-1/2 -z-0 -translate-x-1/2 text-[12rem] font-black tracking-tighter text-white/[0.025] sm:text-[18rem]">
+      <div className="pointer-events-none absolute -bottom-10 left-1/2 -z-0 -translate-x-1/2 text-[12rem] font-black tracking-tighter text-foreground/[0.04] sm:text-[18rem]">
         Teknopact
       </div>
     </footer>

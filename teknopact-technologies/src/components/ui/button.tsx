@@ -19,9 +19,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
-        /** Warm pill CTA — must beat global `a { color: inherit }` on dark heroes */
+        /** Brand pill CTA — must beat global `a { color: inherit }` on dark heroes */
         creamPill:
-          "rounded-full border border-[#c9a86c]/55 bg-gradient-to-b from-[#faf7f2] to-[#ebe4d8] !text-stone-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_2px_8px_rgba(0,0,0,0.25)] antialiased ring-1 ring-white/25 no-underline transition-[transform,box-shadow,background-color,border-color] duration-200 hover:-translate-y-px hover:border-[#b8956a] hover:from-[#f5f0e8] hover:to-[#e2d9cc] hover:!text-stone-950 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_6px_20px_rgba(0,0,0,0.28)] focus-visible:!text-stone-950 active:translate-y-0 active:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1px_4px_rgba(0,0,0,0.3)] visited:!text-stone-950",
+          "rounded-full border border-primary/40 bg-gradient-to-b from-[#e8f4fa] to-[#b8d9ec] !text-[#123b4b] shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_2px_8px_color-mix(in_oklch,var(--primary)_25%,transparent)] antialiased ring-1 ring-white/25 no-underline transition-[transform,box-shadow,background-color,border-color] duration-200 hover:-translate-y-px hover:border-primary/60 hover:from-[#f0f8fc] hover:to-[#a8d4eb] hover:!text-[#011538] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_6px_20px_color-mix(in_oklch,var(--primary)_35%,transparent)] focus-visible:!text-[#123b4b] active:translate-y-0 active:shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1px_4px_rgba(0,0,0,0.2)] visited:!text-[#123b4b]",
       },
       size: {
         default:

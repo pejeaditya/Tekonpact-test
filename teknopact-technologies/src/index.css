@@ -32,30 +32,61 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Light mode (default) — Teknopact corporate blue / navy */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --radius: 0.9rem;
-  --background: oklch(0.06 0 0);
-  --foreground: oklch(0.96 0 0);
-  --card: oklch(0.1 0 0);
-  --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.09 0 0);
-  --popover-foreground: oklch(0.96 0 0);
-  --primary: oklch(0.86 0.02 90);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.16 0 0);
-  --secondary-foreground: oklch(0.94 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.68 0 0);
-  --accent: oklch(0.66 0.11 73);
-  --accent-foreground: oklch(0.1 0 0);
+  --background: oklch(0.98 0.012 238);
+  --foreground: oklch(0.22 0.06 258);
+  --card: oklch(1 0.004 238);
+  --card-foreground: oklch(0.22 0.06 258);
+  --popover: oklch(1 0.004 238);
+  --popover-foreground: oklch(0.22 0.06 258);
+  --primary: oklch(0.587 0.122 238.6);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.025 238);
+  --secondary-foreground: oklch(0.28 0.06 258);
+  --muted: oklch(0.96 0.018 238);
+  --muted-foreground: oklch(0.45 0.04 238);
+  --accent: oklch(0.92 0.04 238);
+  --accent-foreground: oklch(0.22 0.06 258);
   --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.2 0 0);
-  --input: oklch(0.16 0 0);
-  --ring: oklch(0.73 0.09 78);
-  --chart-1: oklch(0.76 0.13 73);
-  --chart-2: oklch(0.63 0.07 155);
-  --chart-3: oklch(0.55 0.05 250);
+  --border: oklch(0.9 0.025 238);
+  --input: oklch(0.92 0.02 238);
+  --ring: oklch(0.587 0.122 238.6);
+  --chart-1: oklch(0.587 0.122 238.6);
+  --chart-2: oklch(0.332 0.053 227.6);
+  --chart-3: oklch(0.205 0.074 258.7);
+  --surface-elevated: oklch(0.97 0.015 238);
+  --gradient-stop: oklch(0.88 0.06 238);
+}
+
+/* Dark mode */
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.12 0.03 258);
+  --foreground: oklch(0.96 0.01 238);
+  --card: oklch(0.16 0.035 258);
+  --card-foreground: oklch(0.96 0.01 238);
+  --popover: oklch(0.14 0.03 258);
+  --popover-foreground: oklch(0.96 0.01 238);
+  --primary: oklch(0.62 0.11 238.6);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.22 0.04 258);
+  --secondary-foreground: oklch(0.94 0.01 238);
+  --muted: oklch(0.2 0.03 258);
+  --muted-foreground: oklch(0.68 0.03 238);
+  --accent: oklch(0.55 0.1 238.6);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.26 0.04 258);
+  --input: oklch(0.2 0.03 258);
+  --ring: oklch(0.62 0.11 238.6);
+  --chart-1: oklch(0.62 0.11 238.6);
+  --chart-2: oklch(0.45 0.06 227.6);
+  --chart-3: oklch(0.35 0.07 258.7);
+  --surface-elevated: oklch(0.18 0.035 258);
+  --gradient-stop: oklch(0.28 0.06 238);
 }
 
 * {
@@ -64,7 +95,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: #050505;
+  background: var(--background);
 }
 
 body {
@@ -72,13 +103,23 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(170, 125, 56, 0.16), transparent 34rem),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05), transparent 26rem),
-    #050505;
+    radial-gradient(circle at 12% 0%, color-mix(in oklch, var(--primary) 14%, transparent), transparent 32rem),
+    radial-gradient(circle at 88% 12%, color-mix(in oklch, var(--chart-3) 8%, transparent), transparent 28rem),
+    radial-gradient(circle at 50% 100%, color-mix(in oklch, var(--primary) 6%, transparent), transparent 36rem),
+    var(--background);
   color: var(--foreground);
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top left, color-mix(in oklch, var(--primary) 22%, transparent), transparent 34rem),
+    radial-gradient(circle at 80% 20%, color-mix(in oklch, var(--chart-3) 14%, transparent), transparent 26rem),
+    radial-gradient(circle at 50% 100%, color-mix(in oklch, var(--primary) 10%, transparent), transparent 40rem),
+    var(--background);
 }
 
 a {
@@ -91,11 +132,10 @@ a {
 }
 
 ::selection {
-  background: rgba(213, 165, 86, 0.32);
-  color: white;
+  background: color-mix(in oklch, var(--primary) 35%, transparent);
+  color: var(--foreground);
 }
 
-/* Infinite horizontal marquee for product screenshot decks */
 @keyframes teknopact-marquee-x {
   to {
     transform: translateX(-50%);
@@ -112,11 +152,10 @@ a {
   }
 }
 
-/* Slim scrollbars for embedded mockups (WebKit + Firefox) */
 .teknopact-scrollbar {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: rgba(213, 165, 86, 0.42) rgba(255, 255, 255, 0.06);
+  scrollbar-color: color-mix(in oklch, var(--primary) 55%, transparent) color-mix(in oklch, var(--muted) 80%, transparent);
 }
 
 .teknopact-scrollbar::-webkit-scrollbar {
@@ -125,24 +164,67 @@ a {
 
 .teknopact-scrollbar::-webkit-scrollbar-track {
   margin-block: 6px;
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in oklch, var(--muted) 60%, transparent);
   border-radius: 9999px;
 }
 
 .teknopact-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 9999px;
-  background: linear-gradient(180deg, rgba(213, 165, 86, 0.55), rgba(213, 165, 86, 0.22));
-  border: 2px solid rgba(0, 0, 0, 0.15);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 70%, transparent),
+    color-mix(in oklch, var(--primary) 30%, transparent)
+  );
+  border: 2px solid color-mix(in oklch, var(--background) 50%, transparent);
   background-clip: padding-box;
 }
 
 .teknopact-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(230, 190, 120, 0.75), rgba(213, 165, 86, 0.4));
-  border-color: rgba(0, 0, 0, 0.12);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--primary) 85%, transparent),
+    color-mix(in oklch, var(--primary) 45%, transparent)
+  );
 }
 
 .teknopact-scrollbar::-webkit-scrollbar-button {
   display: none;
   height: 0;
   width: 0;
+}
+
+/* Light: flat card surface with a very subtle corner tint */
+.teknopact-section-glow {
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      color-mix(in oklch, var(--primary) 6%, transparent),
+      transparent 16rem
+    ),
+    var(--card);
+}
+
+.dark .teknopact-section-glow {
+  background: radial-gradient(
+    circle at 15% 0%,
+    color-mix(in oklch, var(--primary) 18%, transparent),
+    transparent 28rem
+  );
+}
+
+.teknopact-card-gradient {
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklch, var(--primary) 5%, var(--card)),
+    color-mix(in oklch, var(--chart-3) 3%, var(--card)) 55%,
+    var(--card)
+  );
+}
+
+.dark .teknopact-card-gradient {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--primary) 12%, transparent),
+    color-mix(in oklch, var(--surface-elevated) 92%, transparent)
+  );
 }

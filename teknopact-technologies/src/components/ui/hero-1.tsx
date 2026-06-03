@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Menu, Sparkles, X } from "lucide-react"
 
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -60,8 +61,8 @@ const defaultProps: Partial<HeroLandingProps> = {
   loginHref: "#",
   titleSize: "large",
   gradientColors: {
-    from: "oklch(0.68 0.11 73)",
-    to: "oklch(0.23 0.02 80)",
+    from: "oklch(0.587 0.122 238.6)",
+    to: "oklch(0.205 0.074 258.7)",
   },
   callToActions: [
     { text: "Get started", href: "#", variant: "primary" },
@@ -113,15 +114,15 @@ export function HeroLanding(props: HeroLandingProps) {
     }
   }
 
-  const creamPillClass = cn(
-    buttonVariants({ variant: "creamPill", size: "pill" }),
-    "inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+  const primaryCtaClass = cn(
+    buttonVariants({ variant: "default", size: "pill" }),
+    "inline-flex rounded-full bg-primary px-6 text-primary-foreground shadow-md hover:bg-primary/90"
   )
 
   const renderCallToAction = (cta: CallToAction, index: number) => {
     if (cta.variant === "primary") {
       return (
-        <a key={index} href={cta.href} className={creamPillClass}>
+        <a key={index} href={cta.href} className={primaryCtaClass}>
           {cta.text}
         </a>
       )
@@ -131,7 +132,10 @@ export function HeroLanding(props: HeroLandingProps) {
       <a
         key={index}
         href={cta.href}
-        className="text-xs font-semibold text-foreground transition-colors hover:text-muted-foreground sm:text-sm/6"
+        className={cn(
+          buttonVariants({ variant: "outline", size: "pill" }),
+          "rounded-full border-border bg-muted/60 text-foreground hover:bg-muted"
+        )}
       >
         {cta.text} <span aria-hidden="true">→</span>
       </a>
@@ -139,11 +143,23 @@ export function HeroLanding(props: HeroLandingProps) {
   }
 
   return (
-    <div className={cn("relative min-h-screen w-full overflow-hidden bg-background", className)}>
-      {/* Stronger bronze wash on small screens — clipped SVG-style blobs read mostly black on narrow viewports */}
+    <div className={cn("relative min-h-screen w-full overflow-hidden bg-background dark:bg-background", className)}>
+      {/* Light mode: clean card-style glow (matches footer Email Us block) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-0 sm:hidden"
+        className="pointer-events-none absolute inset-0 -z-0 bg-card dark:hidden"
+        style={{
+          background: [
+            "radial-gradient(circle at 18% 12%, color-mix(in oklch, var(--primary) 28%, transparent), transparent 32rem)",
+            "linear-gradient(180deg, var(--card) 0%, var(--background) 100%)",
+          ].join(","),
+        }}
+      />
+
+      {/* Dark mode: atmospheric blob gradients */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-0 hidden dark:block sm:dark:hidden"
         style={{
           background: [
             `radial-gradient(ellipse 110% 60% at 50% 8%, color-mix(in oklch, ${gradientColors?.from} 42%, transparent), transparent 58%)`,
@@ -154,7 +170,7 @@ export function HeroLanding(props: HeroLandingProps) {
 
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-28 -z-0 min-h-screen transform-gpu overflow-hidden blur-2xl sm:-top-80 sm:blur-3xl"
+        className="absolute inset-x-0 -top-28 -z-0 hidden min-h-screen transform-gpu overflow-hidden blur-2xl dark:block sm:-top-80 sm:blur-3xl"
       >
         <div
           style={{
@@ -168,7 +184,7 @@ export function HeroLanding(props: HeroLandingProps) {
 
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-[52%] -z-0 min-h-screen transform-gpu overflow-hidden blur-2xl sm:top-[calc(100%-30rem)] sm:blur-3xl"
+        className="absolute inset-x-0 top-[52%] -z-0 hidden min-h-screen transform-gpu overflow-hidden blur-2xl dark:block sm:top-[calc(100%-30rem)] sm:blur-3xl"
       >
         <div
           style={{
@@ -193,7 +209,8 @@ export function HeroLanding(props: HeroLandingProps) {
               <LogoMark logo={logo} />
             </a>
           </div>
-          <div className="flex lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
@@ -216,21 +233,22 @@ export function HeroLanding(props: HeroLandingProps) {
               ))}
             </div>
           )}
-          {loginText && loginHref && (
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-3">
+            <ThemeToggle />
+            {loginText && loginHref && (
               <a
                 href={loginHref}
                 className="text-sm/6 font-semibold text-foreground transition-colors hover:text-muted-foreground"
               >
                 {loginText} <span aria-hidden="true">→</span>
               </a>
-            </div>
-          )}
+            )}
+          </div>
         </nav>
         <Dialog open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <DialogContent
             showCloseButton={false}
-            className="fixed inset-y-0 right-0 left-auto top-0 z-50 h-full w-full max-w-full translate-x-0 translate-y-0 overflow-y-auto rounded-none border-l border-white/10 bg-card px-4 py-4 sm:max-w-sm sm:px-6 sm:py-6 lg:hidden"
+            className="fixed inset-y-0 right-0 left-auto top-0 z-50 h-full w-full max-w-full translate-x-0 translate-y-0 overflow-y-auto rounded-none border-l border-border bg-card px-4 py-4 sm:max-w-sm sm:px-6 sm:py-6 lg:hidden"
           >
             <DialogTitle className="sr-only">Mobile navigation</DialogTitle>
             <div className="flex items-center justify-between">
@@ -263,17 +281,18 @@ export function HeroLanding(props: HeroLandingProps) {
                     ))}
                   </div>
                 )}
-                {loginText && loginHref && (
-                  <div className="py-6">
+                <div className="flex flex-col gap-4 py-6">
+                  <ThemeToggle className="w-full" />
+                  {loginText && loginHref && (
                     <a
                       href={loginHref}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={cn(creamPillClass, "w-full justify-center")}
+                      className={cn(primaryCtaClass, "w-full justify-center")}
                     >
                       {loginText}
                     </a>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </DialogContent>

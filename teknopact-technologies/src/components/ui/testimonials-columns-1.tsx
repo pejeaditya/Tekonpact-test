@@ -41,7 +41,7 @@ export function TestimonialsColumn({
           <React.Fragment key={index}>
             {testimonials.map(({ text, image, name, role }) => (
               <Card
-                className="w-full max-w-xs border-white/10 bg-white/[0.03] shadow-lg shadow-primary/10"
+                className="w-full max-w-xs border-border bg-card shadow-lg shadow-primary/10"
                 key={`${name}-${index}`}
               >
                 <CardContent className="p-7">
@@ -58,7 +58,7 @@ export function TestimonialsColumn({
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <div className="text-sm font-medium leading-5 tracking-tight text-white">{name}</div>
+                      <div className="text-sm font-medium leading-5 tracking-tight text-foreground">{name}</div>
                       <div className="text-xs leading-5 tracking-tight text-muted-foreground">{role}</div>
                     </div>
                   </div>
