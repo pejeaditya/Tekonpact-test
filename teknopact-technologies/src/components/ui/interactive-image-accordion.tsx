@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -24,7 +24,9 @@ function AccordionPanel({ item, isActive, onMouseEnter }: AccordionPanelProps) {
     <div
       className={cn(
         "relative h-[380px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border transition-[width] duration-700 ease-in-out sm:h-[450px]",
-        isActive ? "w-[min(420px,calc(100vw-2.5rem))] sm:w-[400px]" : "w-14 sm:w-[60px]"
+        isActive
+          ? "w-[min(380px,calc(100vw-3.5rem))] sm:w-[400px]"
+          : "w-12 sm:w-[60px]"
       )}
       onMouseEnter={onMouseEnter}
       onFocus={onMouseEnter}
@@ -94,6 +96,31 @@ export function InteractiveImageAccordion({
   const [activeIndex, setActiveIndex] = useState(
     Math.min(defaultActiveIndex, Math.max(0, items.length - 1))
   )
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [showRightFade, setShowRightFade] = useState(true)
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+
+    const updateFades = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = el
+      const maxScroll = scrollWidth - clientWidth
+      setShowRightFade(maxScroll > 6 && scrollLeft < maxScroll - 6)
+    }
+
+    updateFades()
+    el.addEventListener("scroll", updateFades, { passive: true })
+    const resizeObserver = new ResizeObserver(updateFades)
+    resizeObserver.observe(el)
+    window.addEventListener("resize", updateFades)
+
+    return () => {
+      el.removeEventListener("scroll", updateFades)
+      resizeObserver.disconnect()
+      window.removeEventListener("resize", updateFades)
+    }
+  }, [items.length])
 
   return (
     <div className={cn("bg-background", className)}>
@@ -127,15 +154,26 @@ export function InteractiveImageAccordion({
         </div>
 
         <div className="w-full lg:w-[58%]">
-          <div className="flex flex-row items-stretch justify-start gap-1 overflow-x-auto scroll-px-2 px-1 py-2 sm:justify-center sm:gap-1.5 sm:px-2">
-            {items.map((item, index) => (
-              <AccordionPanel
-                key={item.id}
-                item={item}
-                isActive={index === activeIndex}
-                onMouseEnter={() => setActiveIndex(index)}
+          <div className="relative lg:static">
+            {showRightFade ? (
+              <div
+                className="pointer-events-none absolute inset-y-0 right-0 z-20 w-7 bg-[linear-gradient(to_left,color-mix(in_oklch,var(--background)_28%,transparent)_0%,color-mix(in_oklch,var(--background)_12%,transparent)_55%,transparent_100%)] lg:hidden"
+                aria-hidden
               />
-            ))}
+            ) : null}
+            <div
+              ref={scrollRef}
+              className="teknopact-scrollbar flex flex-row items-stretch justify-start gap-1 overflow-x-auto scroll-smooth scroll-px-2 px-1 py-2 sm:gap-1.5 sm:px-2 lg:justify-center lg:overflow-visible"
+            >
+              {items.map((item, index) => (
+                <AccordionPanel
+                  key={item.id}
+                  item={item}
+                  isActive={index === activeIndex}
+                  onMouseEnter={() => setActiveIndex(index)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

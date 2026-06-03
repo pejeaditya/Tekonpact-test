@@ -52,6 +52,31 @@ function ClusterTopRail({
   scrollRef: RefObject<HTMLDivElement | null>
   onInteractionPauseChange: (paused: boolean) => void
 }) {
+  const [showRightFade, setShowRightFade] = useState(true)
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+
+    const updateFades = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = el
+      const maxScroll = scrollWidth - clientWidth
+      setShowRightFade(maxScroll > 6 && scrollLeft < maxScroll - 6)
+    }
+
+    updateFades()
+    el.addEventListener("scroll", updateFades, { passive: true })
+    const resizeObserver = new ResizeObserver(updateFades)
+    resizeObserver.observe(el)
+    window.addEventListener("resize", updateFades)
+
+    return () => {
+      el.removeEventListener("scroll", updateFades)
+      resizeObserver.disconnect()
+      window.removeEventListener("resize", updateFades)
+    }
+  }, [scrollRef, clusters.length])
+
   return (
     <div
       onMouseEnter={() => onInteractionPauseChange(true)}
@@ -63,36 +88,47 @@ function ClusterTopRail({
         }
       }}
     >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">Service areas</p>
-      <div
-        ref={scrollRef}
-        className="teknopact-scrollbar flex gap-2.5 overflow-x-auto scroll-smooth pb-2"
-      >
+      <p className="mb-2 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-primary sm:mb-3 sm:text-xs sm:tracking-[0.2em]">
+        Service areas
+      </p>
+      <div className="relative -mx-0.5 max-md:py-0.5">
+        {showRightFade ? (
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-7 bg-[linear-gradient(to_left,color-mix(in_oklch,var(--card)_26%,transparent)_0%,color-mix(in_oklch,var(--card)_10%,transparent)_55%,transparent_100%)] sm:w-9"
+            aria-hidden
+          />
+        ) : null}
+        <div
+          ref={scrollRef}
+          className="teknopact-scrollbar flex gap-2 overflow-x-auto scroll-smooth scroll-px-1 pb-1 sm:gap-2.5 sm:pb-2"
+        >
         {clusters.map((cluster) => (
           <button
             key={cluster.id}
             type="button"
             onClick={() => onSelectCluster(cluster.id)}
             className={cn(
-              "flex min-w-[11rem] shrink-0 items-center gap-2.5 rounded-2xl border px-3.5 py-3 text-left text-sm shadow-sm transition-all duration-300 sm:min-w-0 sm:px-4",
+              "flex min-w-[8.75rem] shrink-0 items-center gap-2 rounded-xl border px-3 py-2.5 text-left text-xs shadow-sm transition-all duration-300",
+              "sm:min-w-0 sm:gap-2.5 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm",
               activeClusterId === cluster.id
-                ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/20 sm:shadow-md sm:shadow-primary/25"
                 : "border-border/80 bg-card text-foreground/80 hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
             )}
           >
             <span
               className={cn(
-                "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors",
+                "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors sm:h-9 sm:w-9 sm:rounded-xl",
                 activeClusterId === cluster.id
                   ? "bg-primary-foreground/15 text-primary-foreground"
                   : "bg-primary/10 text-primary"
               )}
             >
-              <cluster.icon className="size-4 shrink-0" />
+              <cluster.icon className="size-3.5 shrink-0 sm:size-4" />
             </span>
-            <span className="font-semibold leading-snug">{cluster.title}</span>
+            <span className="line-clamp-2 font-semibold leading-snug">{cluster.title}</span>
           </button>
         ))}
+        </div>
       </div>
     </div>
   )
@@ -266,7 +302,7 @@ export function ProductTabsSection() {
           </p>
         </div>
 
-        <div className="mb-8 rounded-2xl border border-primary/15 bg-card/90 p-4 shadow-lg shadow-primary/5 backdrop-blur-sm sm:p-5">
+        <div className="mb-6 max-w-xl rounded-xl border border-primary/15 bg-card/90 p-3 shadow-md shadow-primary/5 sm:mb-8 sm:max-w-none sm:rounded-2xl sm:p-5 sm:shadow-lg">
           <ClusterTopRail
             clusters={clusters}
             activeClusterId={activeClusterId}
