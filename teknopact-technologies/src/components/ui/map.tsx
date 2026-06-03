@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import DottedMap from "dotted-map"
 import { AnimatePresence, motion } from "framer-motion"
 import { useTheme } from "next-themes"
 
 import { brand } from "@/lib/brand"
 import { offices } from "@/lib/content"
+import { createDottedMap } from "@/lib/dotted-map"
 import { cn } from "@/lib/utils"
 
 export type OfficeTooltipDetails = {
@@ -237,7 +237,7 @@ export function WorldMap({
 
   const isDark = mounted && resolvedTheme === "dark"
 
-  const map = useMemo(() => new DottedMap({ height: 100, grid: "diagonal" }), [])
+  const map = useMemo(() => createDottedMap({ height: 100, grid: "diagonal" }), [])
 
   const svgMap = useMemo(
     () =>
