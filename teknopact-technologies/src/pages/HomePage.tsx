@@ -4,7 +4,8 @@ import {
   FaqSection,
   FeaturesSection,
   HeroSection,
-  ProductTabsSection,
+  ProductsSection,
+  ServicesShowcaseSection,
   TeamSection,
   TestimonialSection,
   TestimonialsColumnsSection,
@@ -17,9 +18,10 @@ export function HomePage() {
     <div className="min-h-screen bg-background text-foreground">
       <main>
         <HeroSection />
-        <ProductTabsSection />
         <TrustedBySection />
         <FeaturesSection />
+        <ProductsSection />
+        <ServicesShowcaseSection />
         <VideoSection />
         <TeamSection />
         <TestimonialSection />

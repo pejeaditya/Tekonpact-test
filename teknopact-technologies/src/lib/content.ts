@@ -42,6 +42,7 @@ export const company = {
 }
 
 export const navLinks = [
+  { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Presence", href: "#presence" },
   { label: "Team", href: "#team" },
@@ -712,7 +713,7 @@ export const caseStudies = [
       "For the Education and Training Qualifications Authority—automating institution reviews (DSR, DHR, DVR) from physical visits to a cloud-based, real-time platform. Single dashboard for evaluation analysis and end-to-end review.",
     highlights: ["Eliminates physical meetings", "Single platform", "Cloud automation"],
     thumbnail:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&h=600&q=80",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
     category: "ERP & CRM",
@@ -721,7 +722,7 @@ export const caseStudies = [
       "Delivered customized ERP and CRM modules for clients in Qatar and Bahrain—commercial services, management services, transportation, and restaurant management solutions.",
     highlights: ["Qatar & Bahrain delivery", "Integrated suites", "Industry-specific modules"],
     thumbnail:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=600&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
     category: "Digital",
@@ -730,7 +731,7 @@ export const caseStudies = [
       "Built tailored websites for IT, sanitizer/e-commerce, marketing, and management consulting companies—simplifying technology and driving customer engagement.",
     highlights: ["E-commerce portals", "Case study showcases", "Custom brand experiences"],
     thumbnail:
-      "https://images.unsplash.com/photo-1547658719-da2b506691c2?auto=format&fit=crop&w=800&h=600&q=80",
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
     category: "Telecom",
@@ -739,7 +740,52 @@ export const caseStudies = [
       "Eight-month delivery of a conferencing platform with peer-to-peer video, multiuser conferencing, and live whiteboard—used across EduTech, medical, and entertainment sectors.",
     highlights: ["Android, iOS & Web", "Slot booking & payments", "Europe psychic-reading platform"],
     thumbnail:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&h=600&q=80",
+      "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1200&h=600&q=80",
+  },
+  {
+    category: "Manufacturing & IoT",
+    title: "AI-Driven Operational Efficiency in Manufacturing",
+    description:
+      "A global manufacturer replaced subjective visual quality control and reactive maintenance with Ingenious Tech's Vision AI, Fogwind Smart Factory telemetry, and PlantOps MES—achieving total supply chain transparency and improved equipment effectiveness.",
+    highlights: ["Automated defect detection", "Predictive maintenance", "Reduced cycle times"],
+    thumbnail:
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=600&q=80",
+  },
+  {
+    category: "Telecom",
+    title: "Scaling Telecom Intelligence and Network Orchestration",
+    description:
+      "A large telecom provider deployed NetoAI's ViNG and NAPI platforms with Teleindia infrastructure support—enabling zero-touch service activations, automated ticket triaging, and domain-specific LLM remediations with drastically reduced downtime.",
+    highlights: ["Zero-touch activation", "TSLAM remediation", "High-availability infra"],
+    thumbnail:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&h=600&q=80",
+  },
+  {
+    category: "Fintech",
+    title: "Autonomous Business Operations in Fintech",
+    description:
+      "A fast-growing fintech aggregator automated its full loan lifecycle—from lead sourcing to payout—using Xpertnest's BharatEarns CRM and AiQmen's AgenticAxis, maintaining strict data protection compliance while boosting conversion rates.",
+    highlights: ["End-to-end loan automation", "Policy-compliant agents", "Scaled compliance"],
+    thumbnail:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=600&q=80",
+  },
+  {
+    category: "ESG & Strategy",
+    title: "Strategic Execution and ESG Compliance",
+    description:
+      "A global organization bridged the gap between boardroom strategy and ground-level execution using Cascade's OKR platform, while 4Seer Tech's 4Scope automated Scope 1–3 greenhouse gas reporting—transforming sustainability into a proactive imperative.",
+    highlights: ["Real-time OKR alignment", "Automated ESG reporting", "Data-backed leadership"],
+    thumbnail:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=600&q=80",
+  },
+  {
+    category: "Cybersecurity",
+    title: "Secure Digital Transformation in High-Security Environments",
+    description:
+      "A multinational corporation modernized legacy IT with Finesse's AI Transformation Roadmap, AI Guardrails & LLM Gateway, and Zero Trust architecture—supported by iValue Group's 24/7 SOC—enabling safe adoption of generative AI without compromising data integrity.",
+    highlights: ["Zero Trust architecture", "GenAI guardrails", "24/7 SOC coverage"],
+    thumbnail:
+      "https://images.unsplash.com/photo-1550751827-4bd374c1f58b?auto=format&fit=crop&w=1200&h=600&q=80",
   },
 ]
 

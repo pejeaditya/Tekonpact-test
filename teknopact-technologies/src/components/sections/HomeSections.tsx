@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from "react"
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { Menu, Quote, Star } from "lucide-react"
 
@@ -15,6 +15,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { CardSticky, ContainerScroll } from "@/components/ui/cards-stack"
+import { CategoryShowcase } from "@/components/ui/animated-feature-carousel"
 import { CircularTestimonials } from "@/components/ui/circular-testimonials"
 import { HeroParallax, HeroParallaxHeader } from "@/components/ui/hero-parallax"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
@@ -37,6 +39,7 @@ import {
   whyTeknopactAccordionItems,
 } from "@/lib/content"
 import type { ServiceCluster } from "@/lib/content"
+import { buildServiceCategories, productCategories } from "@/lib/products"
 import { cn } from "@/lib/utils"
 
 function ClusterTopRail({
@@ -226,6 +229,52 @@ export function HeroSection() {
           />
         }
       />
+    </section>
+  )
+}
+
+export function ProductsSection() {
+  return (
+    <section
+      id="products"
+      className="relative overflow-hidden border-b border-border py-16 sm:py-24"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center px-5 sm:px-8">
+        <CategoryShowcase
+          categories={productCategories}
+          title="Products"
+          subtitle="Artificial intelligence, IoT, cybersecurity, and specialized vertical solutions from leading enterprise technology vendors."
+        />
+      </div>
+    </section>
+  )
+}
+
+export function ServicesShowcaseSection() {
+  const serviceCategories = useMemo(() => buildServiceCategories(), [])
+
+  return (
+    <section
+      id="services"
+      className="relative overflow-hidden border-b border-border py-16 sm:py-24"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center px-5 sm:px-8">
+        <CategoryShowcase
+          categories={serviceCategories}
+          title="Services"
+          subtitle="Teknopact's end-to-end service offerings — from ERP and core banking to managed services, blockchain, and BPM."
+          itemsLabel="Services"
+          autoCycleInterval={10000}
+        />
+      </div>
     </section>
   )
 }
@@ -604,78 +653,102 @@ export function TestimonialsColumnsSection() {
 
 export function BlogPreviewSection() {
   return (
-    <section id="case-studies" className="border-b border-border bg-background py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <Badge
-              variant="secondary"
-              className="rounded-full border border-primary/25 bg-primary/10 text-primary"
-            >
-              Case studies
-            </Badge>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-              Teknopact engagement highlights
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">
-              Representative deliveries across education, ERP, digital, and telecom—aligned with our
-              corporate portfolio.
-            </p>
-          </div>
-          <Button asChild className="w-fit shrink-0 rounded-full">
+    <section
+      id="case-studies"
+      className="relative border-b border-border py-16 sm:py-24"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_55%)]"
+        aria-hidden
+      />
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8">
+        <div className="mb-10 max-w-2xl">
+          <Badge
+            variant="secondary"
+            className="w-fit rounded-full border border-primary/25 bg-primary/10 text-primary"
+          >
+            Case studies
+          </Badge>
+          <h2 className="mb-4 mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Real outcomes from{" "}
+            <span className="text-primary">enterprise delivery</span>
+          </h2>
+          <p className="text-sm leading-7 text-muted-foreground sm:text-base">
+            From education and ERP to telecom, fintech, and cybersecurity—Teknopact
+            delivers tailored solutions across the GCC and beyond. Scroll through
+            selected engagements to see how we turn complex requirements into
+            measurable results.
+          </p>
+          <Button asChild className="mt-6 w-fit rounded-full">
             <a href="#contact">Discuss your project</a>
           </Button>
         </div>
 
-        <div
-          className={cn(
-            "mt-10 flex gap-4 overflow-x-auto scroll-smooth pb-2 teknopact-scrollbar",
-            "snap-x snap-mandatory -mx-5 scroll-px-5 px-5",
-            "md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:snap-none lg:grid-cols-4"
-          )}
-        >
-          {caseStudies.map((study) => (
-            <Card
+        <ContainerScroll className="relative z-0 w-full space-y-6 py-4 pb-[35vh]" style={{ minHeight: `${caseStudies.length * 48 + 30}vh` }}>
+          {caseStudies.map((study, index) => (
+            <CardSticky
               key={study.title}
-              className={cn(
-                "group/study w-[min(88vw,20rem)] shrink-0 snap-center overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300",
-                "hover:-translate-y-1 hover:border-primary/30 hover:shadow-md",
-                "md:w-auto md:shrink"
-              )}
+              index={Math.min(index + 1, 5)}
+              incrementY={10}
+              incrementZ={1}
+              stickyTopOffset={64}
+              maxZIndex={40}
+              role="article"
+              aria-labelledby={`case-study-${index}-title`}
+              className="w-full overflow-hidden rounded-2xl border border-border bg-card/95 shadow-md backdrop-blur-md"
             >
-              <div className="relative h-40 overflow-hidden border-b border-border sm:h-44">
+              <div className="relative h-48 w-full shrink-0 overflow-hidden bg-muted sm:h-56 lg:h-64">
                 <img
                   src={study.thumbnail}
                   alt={study.title}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover/study:scale-105"
+                  referrerPolicy="no-referrer"
+                  className="size-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.onerror = null
+                    event.currentTarget.src =
+                      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=600&q=80"
+                  }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 <Badge
                   variant="secondary"
-                  className="absolute left-4 top-4 rounded-full border border-primary/25 bg-background/90 text-primary backdrop-blur-sm"
+                  className="absolute left-4 top-4 z-10 rounded-full border border-primary/25 bg-background/90 px-2 py-0.5 text-xs text-primary backdrop-blur-sm"
                 >
                   {study.category}
                 </Badge>
               </div>
-              <CardContent className="p-5">
-                <h3 className="text-lg font-semibold leading-tight text-foreground">{study.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{study.description}</p>
+              <div className="p-6 sm:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <h3
+                    id={`case-study-${index}-title`}
+                    className="text-xl font-bold tracking-tight text-foreground sm:text-2xl"
+                  >
+                    {study.title}
+                  </h3>
+                  <span className="shrink-0 text-2xl font-bold text-primary">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
+                  {study.description}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {study.highlights.map((h) => (
+                  {study.highlights.map((highlight) => (
                     <Badge
-                      key={h}
+                      key={highlight}
                       variant="outline"
                       className="rounded-full border-primary/20 bg-primary/5 text-xs text-primary"
                     >
-                      {h}
+                      {highlight}
                     </Badge>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </CardSticky>
           ))}
-        </div>
+        </ContainerScroll>
       </div>
     </section>
   )
