@@ -35,7 +35,7 @@ export function DesktopMainNav({
                   {productMenuItems.map((item) => (
                     <NavigationMenuLink key={item.title} asChild>
                       <Link
-                        to="/products?tab=services"
+                        to="/services"
                         className="group flex items-center gap-3 rounded-lg p-3 text-sm font-medium text-foreground transition hover:bg-muted/60"
                       >
                         <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-muted/60 text-primary">
@@ -77,11 +77,11 @@ export function MobileMainNav({
       {navLinks.map((link) =>
         link.label === "Services" ? (
           <div key={link.label} className="flex flex-col gap-1">
-            <AppLink href="/products?tab=services" className={cn(linkClassName, "font-medium text-foreground")}>
+            <AppLink href="/services" className={cn(linkClassName, "font-medium text-foreground")}>
               Services
             </AppLink>
             {productMenuItems.map((item) => (
-              <AppLink key={item.title} href="/products?tab=services" className={serviceLinkClassName}>
+              <AppLink key={item.title} href="/services" className={serviceLinkClassName}>
                 {item.title}
               </AppLink>
             ))}

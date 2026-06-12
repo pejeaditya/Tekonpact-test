@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom"
 const homePageImport = () => import("@/pages/HomePage")
 const homeBelowFoldImport = () => import("@/components/sections/home/below-fold")
 const productsPageImport = () => import("@/pages/ProductsPage")
+const servicesPageImport = () => import("@/pages/ServicesPage")
 const caseStudiesPageImport = () => import("@/pages/CaseStudiesPage")
 
 export function prefetchHomeRoute() {
@@ -17,6 +18,9 @@ function prefetchForPath(pathname: string) {
   }
   if (!pathname.startsWith("/products")) {
     void productsPageImport()
+  }
+  if (!pathname.startsWith("/services")) {
+    void servicesPageImport()
   }
   if (pathname !== "/case-studies") {
     void caseStudiesPageImport()

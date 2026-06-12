@@ -5,7 +5,7 @@ import { ChevronRight, Search, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { company, productsPageIntro, servicesPageIntro } from "@/lib/content"
+import { productsPageIntro, servicesPageIntro } from "@/lib/content"
 import type { ShowcaseItem } from "@/lib/catalog-showcase"
 import {
   buildProductShowcaseItems,
@@ -192,7 +192,7 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
                     setSelectedItem(item)
                   }
                 }}
-                className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-border hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+                className="group relative flex cursor-pointer flex-col rounded-2xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:z-10 hover:-translate-y-0.5 hover:border-border hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
               >
                   <div className="flex flex-1 flex-col p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-3">
@@ -207,10 +207,10 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
                     <p className="mt-4 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                       Teknopact · {item.categoryName}
                     </p>
-                    <h3 className="mt-2 line-clamp-2 text-xl font-bold leading-snug text-foreground sm:text-[1.35rem]">
+                    <h3 className="mt-2 line-clamp-2 text-xl font-bold leading-snug text-foreground transition-[color] duration-300 group-hover:line-clamp-none sm:text-[1.35rem]">
                       {item.name}
                     </h3>
-                    <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground transition-[color] duration-300 group-hover:line-clamp-none">
                       {item.description}
                     </p>
 
@@ -297,40 +297,24 @@ function ShowcaseItemDetail({
           transition={{ duration: 0.4 }}
           className="relative z-10 w-full px-6 py-14 sm:px-10 sm:py-20 lg:px-12"
         >
-          <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
-            <div className="flex items-start gap-6">
-              <div className="rounded-2xl bg-primary-foreground/10 p-6 backdrop-blur-sm">
-                <DetailIcon className="h-12 w-12 text-primary-foreground" />
-              </div>
-              <div className="max-w-3xl">
-                <h2 id="showcase-detail-title" className="text-4xl font-bold sm:text-5xl lg:text-6xl">
-                  {item.name}
-                </h2>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      className="border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
+          <div className="mx-auto flex max-w-7xl items-start gap-6">
+            <div className="rounded-2xl bg-primary-foreground/10 p-6 backdrop-blur-sm">
+              <DetailIcon className="h-12 w-12 text-primary-foreground" />
             </div>
-
-            <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto lg:min-w-[20rem] lg:flex-col">
-              <Button asChild size="pill" variant="creamPill">
-                <a href={`mailto:${company.email}`}>Get Started</a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                <a href={`mailto:${company.email}`}>Contact Sales</a>
-              </Button>
+            <div className="max-w-3xl">
+              <h2 id="showcase-detail-title" className="text-4xl font-bold sm:text-5xl lg:text-6xl">
+                {item.name}
+              </h2>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    className="border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -343,17 +327,20 @@ function ShowcaseItemDetail({
           transition={{ duration: 0.4, delay: 0.1 }}
         >
           <h3 className="mb-8 text-2xl font-bold sm:text-3xl">Key Highlights</h3>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 [&>*]:h-full">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {item.features.map((feature, index) => (
               <motion.div
                 key={feature}
+                layout
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.08 * index }}
-                className="flex h-full min-h-[7.5rem] items-start gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6"
+                transition={{ duration: 0.35, delay: 0.08 * index, layout: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+                className="group relative flex min-h-[7.5rem] items-start gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 transition-colors duration-300 hover:z-10 hover:border-primary/35 hover:bg-primary/8 hover:shadow-md"
               >
-                <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-primary" />
-                <span className="line-clamp-4 text-base font-medium leading-relaxed">{feature}</span>
+                <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-0.5" />
+                <span className="line-clamp-4 text-base font-medium leading-relaxed transition-[color] duration-300 group-hover:line-clamp-none">
+                  {feature}
+                </span>
               </motion.div>
             ))}
           </div>

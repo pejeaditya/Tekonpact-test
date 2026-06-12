@@ -1,4 +1,6 @@
+import type { ReactNode } from "react"
 import { Quote } from "lucide-react"
+import { motion } from "motion/react"
 
 import { AppLink } from "@/components/app-link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -21,6 +23,33 @@ import {
 } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
+type HomeBandVariant = "primary" | "neutral"
+
+function HomeSectionBand({
+  variant,
+  id,
+  className,
+  children,
+}: {
+  variant: HomeBandVariant
+  id?: string
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <section
+      id={id}
+      className={cn(
+        "relative py-16 sm:py-24",
+        variant === "primary" ? "home-band-primary" : "home-band-neutral",
+        className
+      )}
+    >
+      {children}
+    </section>
+  )
+}
+
 export function HomeBelowFold() {
   const firstColumn = customerTestimonials.slice(0, 3)
   const secondColumn = customerTestimonials.slice(3, 6)
@@ -32,8 +61,9 @@ export function HomeBelowFold() {
         className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-muted/20 to-background sm:h-40"
         aria-hidden
       />
-      <section className="relative bg-background py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="relative overflow-hidden bg-background py-16 sm:py-24">
+        <div className="home-section-bridge sm:h-64" aria-hidden />
+        <div className="relative z-[2] mx-auto max-w-7xl px-5 sm:px-8">
           <InteractiveImageAccordion
             badge="Why Teknopact?"
             title="Trusted across government and enterprise"
@@ -46,9 +76,15 @@ export function HomeBelowFold() {
         </div>
       </section>
 
-      <section id="features" className="py-16 sm:py-24">
+      <HomeSectionBand variant="primary" id="features">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+          <motion.div
+            className="mx-auto max-w-2xl text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
             <Badge variant="secondary" className="rounded-full border border-border bg-muted/60 text-muted-foreground">
               Our expertise
             </Badge>
@@ -58,30 +94,44 @@ export function HomeBelowFold() {
             <p className="mt-4 text-base leading-7 text-muted-foreground">
               The world economy is transforming through ICT and data—we simplify complexities and deliver intelligent solutions.
             </p>
-          </div>
+          </motion.div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {expertisePillars.map((feature, index) => (
-              <Card
+              <motion.div
                 key={feature.title}
-                className={cn(
-                  "border-border teknopact-card-gradient",
-                  index === 1 && "border-primary/30 bg-primary/10"
-                )}
+                className="h-full"
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
               >
-                <CardHeader>
-                  <span className="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                    <feature.icon className="size-5" />
-                  </span>
-                  <CardTitle className="text-foreground">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm leading-6 text-muted-foreground">{feature.description}</CardContent>
-              </Card>
+                <Card
+                  className={cn(
+                    "group h-full border-border teknopact-card-gradient transition-all duration-300",
+                    "hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10",
+                    index === 1 && "border-primary/30 bg-primary/10"
+                  )}
+                >
+                  <CardHeader className="gap-3">
+                    <span className="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
+                      <feature.icon className="size-5" />
+                    </span>
+                    <CardTitle className="text-foreground transition-colors duration-300 group-hover:text-primary">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-sm leading-6 text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+                    {feature.description}
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </HomeSectionBand>
 
-      <section id="presence" className="py-16 sm:py-24">
+      <HomeSectionBand variant="neutral" id="presence">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mb-10 max-w-2xl">
             <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
@@ -96,9 +146,10 @@ export function HomeBelowFold() {
           </div>
           <WorldMap dots={presenceMapDots} className="mt-8" />
         </div>
-      </section>
+      </HomeSectionBand>
 
-      <section
+      <HomeSectionBand
+        variant="primary"
         id="team"
         className="py-8 sm:py-16 md:py-24 max-md:max-h-[100dvh] max-md:overflow-hidden"
       >
@@ -127,9 +178,9 @@ export function HomeBelowFold() {
             />
           </div>
         </div>
-      </section>
+      </HomeSectionBand>
 
-      <section className="py-16 sm:py-24">
+      <HomeSectionBand variant="neutral">
         <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
           <Quote className="mx-auto size-10 text-primary" />
           <blockquote className="mt-6 text-balance text-2xl font-medium leading-tight text-foreground sm:text-3xl">
@@ -145,10 +196,9 @@ export function HomeBelowFold() {
             </div>
           </div>
         </div>
-      </section>
+      </HomeSectionBand>
 
-      <section className="relative overflow-hidden bg-background py-16 sm:py-24">
-        <div className="absolute inset-x-0 top-1/4 h-72 bg-[radial-gradient(circle_at_center,color-mix(in_oklch,var(--primary)_22%,transparent),transparent_42rem)]" />
+      <HomeSectionBand variant="primary" className="overflow-hidden">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto flex max-w-[540px] flex-col items-center justify-center text-center">
             <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
@@ -175,9 +225,9 @@ export function HomeBelowFold() {
             </div>
           </div>
         </div>
-      </section>
+      </HomeSectionBand>
 
-      <section id="faq" className="py-16 sm:py-24">
+      <HomeSectionBand variant="neutral" id="faq">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm text-primary">FAQ</p>
@@ -200,7 +250,7 @@ export function HomeBelowFold() {
             ))}
           </Accordion>
         </div>
-      </section>
+      </HomeSectionBand>
     </div>
   )
 }

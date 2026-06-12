@@ -7,6 +7,7 @@ import { ScrollToHash } from "@/components/scroll-to-hash"
 
 const HomePage = lazy(() => import("@/pages/HomePage").then((m) => ({ default: m.HomePage })))
 const ProductsPage = lazy(() => import("@/pages/ProductsPage").then((m) => ({ default: m.ProductsPage })))
+const ServicesPage = lazy(() => import("@/pages/ServicesPage").then((m) => ({ default: m.ServicesPage })))
 const CaseStudiesPage = lazy(() =>
   import("@/pages/CaseStudiesPage").then((m) => ({ default: m.CaseStudiesPage }))
 )
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
         </Routes>
       </Suspense>

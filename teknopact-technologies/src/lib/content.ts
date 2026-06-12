@@ -43,7 +43,7 @@ export const company = {
 
 export const navLinks = [
   { label: "Products", href: "/products" },
-  { label: "Services", href: "/products?tab=services" },
+  { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
 ]
 

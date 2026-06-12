@@ -100,7 +100,7 @@ export function HeroSection() {
                   <AppLink href="/#contact">Contact Us</AppLink>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full border-border bg-muted/60">
-                  <AppLink href="/products?tab=services">Our Services</AppLink>
+                  <AppLink href="/services">Our Services</AppLink>
                 </Button>
               </>
             }

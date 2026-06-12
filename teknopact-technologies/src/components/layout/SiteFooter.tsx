@@ -9,7 +9,7 @@ import { company } from "@/lib/content"
 
 const footerLinks = [
   { label: "Products", href: "/products" },
-  { label: "Services", href: "/products?tab=services" },
+  { label: "Services", href: "/services" },
   { label: "Presence", href: "/#presence" },
   { label: "Team", href: "/#team" },
   { label: "Case Studies", href: "/case-studies" },
