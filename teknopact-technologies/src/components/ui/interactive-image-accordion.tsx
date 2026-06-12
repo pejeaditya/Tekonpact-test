@@ -23,7 +23,7 @@ function AccordionPanel({ item, isActive, onMouseEnter }: AccordionPanelProps) {
   return (
     <div
       className={cn(
-        "relative h-[380px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-border transition-[width] duration-700 ease-in-out sm:h-[450px]",
+        "relative h-[380px] shrink-0 cursor-pointer overflow-hidden rounded-2xl shadow-sm transition-[width] duration-700 ease-in-out sm:h-[450px]",
         isActive
           ? "w-[min(380px,calc(100vw-3.5rem))] sm:w-[400px]"
           : "w-12 sm:w-[60px]"
@@ -163,7 +163,7 @@ export function InteractiveImageAccordion({
             ) : null}
             <div
               ref={scrollRef}
-              className="teknopact-scrollbar flex flex-row items-stretch justify-start gap-1 overflow-x-auto scroll-smooth scroll-px-2 px-1 py-2 sm:gap-1.5 sm:px-2 lg:justify-center lg:overflow-visible"
+              className="teknopact-scrollbar flex flex-row items-stretch justify-start gap-2 overflow-x-auto scroll-smooth scroll-px-2 px-1 py-2 sm:gap-3 sm:px-2 lg:justify-center lg:overflow-visible"
             >
               {items.map((item, index) => (
                 <AccordionPanel

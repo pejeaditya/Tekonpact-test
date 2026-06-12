@@ -1,22 +1,37 @@
 import { Globe2, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react"
+import { Link } from "react-router-dom"
 
+import { AppLink } from "@/components/app-link"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { brand } from "@/lib/brand"
 import { company } from "@/lib/content"
 
 const footerLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Presence", href: "#presence" },
-  { label: "Team", href: "#team" },
-  { label: "Case Studies", href: "#case-studies" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/products?tab=services" },
+  { label: "Presence", href: "/#presence" },
+  { label: "Team", href: "/#team" },
+  { label: "Case Studies", href: "/case-studies" },
 ]
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="relative overflow-hidden border-t border-border bg-card">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
-        <div className="rounded-[2rem] border border-border bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] px-6 py-14 text-center shadow-2xl shadow-black/40 sm:px-10">
+    <footer id="contact" className="relative overflow-hidden bg-background">
+      <section className="relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent sm:h-40"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-5 py-14 text-center sm:px-8 sm:py-20">
           <p className="text-sm text-primary">Thank you for visiting Teknopact</p>
           <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Step into the future with intelligent IT solutions.
@@ -33,16 +48,18 @@ export function SiteFooter() {
             </Button>
           </div>
         </div>
+      </section>
 
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <a href="#home" className="inline-flex flex-col gap-3">
+            <Link to="/" className="inline-flex flex-col gap-3">
               <img
                 src={brand.logo.src}
                 alt={brand.logo.alt}
                 className="h-8 w-auto max-w-[12rem] object-contain object-left"
               />
-            </a>
+            </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{company.description}</p>
             <div className="mt-6 flex gap-2">
               {[Globe2, MessageCircle, Send, Mail].map((Icon, index) => (
@@ -57,9 +74,13 @@ export function SiteFooter() {
             <h3 className="text-sm font-medium text-foreground">Quick links</h3>
             <div className="mt-4 flex flex-col gap-3">
               {footerLinks.map((link) => (
-                <a key={link.label} href={link.href} className="text-sm text-muted-foreground hover:text-foreground">
+                <AppLink
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm text-muted-foreground hover:text-foreground"
+                >
                   {link.label}
-                </a>
+                </AppLink>
               ))}
             </div>
           </div>
@@ -86,8 +107,8 @@ export function SiteFooter() {
         <Separator className="bg-white/10" />
         <div className="flex flex-col gap-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-5">
-            <a href="#home">Terms of Service</a>
-            <a href="#home">Privacy Policy</a>
+            <AppLink href="/">Terms of Service</AppLink>
+            <AppLink href="/">Privacy Policy</AppLink>
           </div>
           <p>© 2026 {company.name}. All rights reserved.</p>
         </div>

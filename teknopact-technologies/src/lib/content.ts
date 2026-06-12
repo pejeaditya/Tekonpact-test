@@ -42,12 +42,9 @@ export const company = {
 }
 
 export const navLinks = [
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "Presence", href: "#presence" },
-  { label: "Team", href: "#team" },
-  { label: "Case Studies", href: "#case-studies" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/products?tab=services" },
+  { label: "Case Studies", href: "/case-studies" },
 ]
 
 export const stats = [
@@ -705,8 +702,39 @@ export const teamCircularTestimonials = teamMembers.map((member) => ({
   src: member.imageUrl,
 }))
 
-export const caseStudies = [
+export type CaseStudy = {
+  id: string
+  category: string
+  title: string
+  description: string
+  highlights: string[]
+  thumbnail: string
+}
+
+export const productsPageIntro = {
+  headline:
+    "Enterprise technology, ready to deploy. A curated catalog spanning artificial intelligence, IoT, cybersecurity, and specialized vertical solutions from leading vendors.",
+  body:
+    "Every organization faces a different stack of constraints—compliance, scale, integration, and time to value. Teknopact helps you navigate the enterprise product landscape across the GCC and MENA, pairing the right technology with the right implementation path.",
+}
+
+export const servicesPageIntro = {
+  headline:
+    "End-to-end capability. Advisory, ERP, core banking, managed services, blockchain, and business process solutions—delivered by Teknopact across the GCC and MENA.",
+  body:
+    "From strategy and architecture through delivery and managed operations, we bring consultants, architects, and engineers who simplify complexity and accelerate outcomes. The goal is always pragmatic transformation—measurable impact with the passion and expertise your sector demands.",
+}
+
+export const caseStudiesPageIntro = {
+  headline:
+    "Challenges? Accepted. A curated selection of Teknopact engagements—from education and ERP to telecom, fintech, and cybersecurity.",
+  body:
+    "The more demanding the brief, the more we are in our element. On every project we question assumptions and rethink what is possible—sometimes reinventing our own approach. The goal is always to deliver outcomes that surprise: with passion, deep expertise, and measurable impact—whatever the sector, wherever the location.",
+}
+
+export const caseStudies: CaseStudy[] = [
   {
+    id: "review-management-system",
     category: "Education & Training",
     title: "Review Management System (RMS)",
     description:
@@ -716,6 +744,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "custom-erp-crm",
     category: "ERP & CRM",
     title: "Custom ERP & CRM Modules",
     description:
@@ -725,6 +754,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "website-creation-portfolio",
     category: "Digital",
     title: "Website Creation Portfolio",
     description:
@@ -734,6 +764,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "webrtc-conferencing",
     category: "Telecom",
     title: "WebRTC Conferencing Platform",
     description:
@@ -743,6 +774,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "manufacturing-ai-efficiency",
     category: "Manufacturing & IoT",
     title: "AI-Driven Operational Efficiency in Manufacturing",
     description:
@@ -752,6 +784,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "telecom-intelligence",
     category: "Telecom",
     title: "Scaling Telecom Intelligence and Network Orchestration",
     description:
@@ -761,6 +794,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "fintech-autonomous-ops",
     category: "Fintech",
     title: "Autonomous Business Operations in Fintech",
     description:
@@ -770,6 +804,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "esg-strategic-execution",
     category: "ESG & Strategy",
     title: "Strategic Execution and ESG Compliance",
     description:
@@ -779,6 +814,7 @@ export const caseStudies = [
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=600&q=80",
   },
   {
+    id: "secure-digital-transformation",
     category: "Cybersecurity",
     title: "Secure Digital Transformation in High-Security Environments",
     description:

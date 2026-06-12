@@ -228,3 +228,10 @@ a {
     color-mix(in oklch, var(--surface-elevated) 92%, transparent)
   );
 }
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+}
