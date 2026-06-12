@@ -56,9 +56,9 @@ export function HomeBelowFold() {
   const thirdColumn = customerTestimonials.slice(6, 9)
 
   return (
-    <div className="relative bg-background">
+    <div className="relative -mt-28 bg-background pt-28 sm:-mt-36 sm:pt-36">
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-muted/20 to-background sm:h-40"
+        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-28 h-36 sm:-top-36 sm:h-44"
         aria-hidden
       />
       <section className="relative overflow-hidden bg-background py-16 sm:py-24">

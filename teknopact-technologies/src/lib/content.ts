@@ -749,7 +749,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Custom ERP & CRM Modules",
     description:
       "Delivered customized ERP and CRM modules for clients in Qatar and Bahrain—commercial services, management services, transportation, and restaurant management solutions.",
-    highlights: ["Qatar & Bahrain delivery", "Integrated suites", "Industry-specific modules"],
+    highlights: ["Integrated suites", "Industry-specific modules"],
     thumbnail:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80",
   },

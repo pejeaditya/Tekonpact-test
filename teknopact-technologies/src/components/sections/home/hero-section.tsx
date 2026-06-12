@@ -83,7 +83,7 @@ export function HeroSection() {
     <section id="home" className="relative bg-background">
       <HeroParallaxNav />
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-40 bg-gradient-to-b from-transparent to-background sm:h-52"
+        className="home-hero-exit-fade pointer-events-none absolute inset-x-0 bottom-0 z-10 h-56 sm:h-72 md:h-80"
         aria-hidden
       />
       <HeroParallax

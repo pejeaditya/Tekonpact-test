@@ -2,10 +2,9 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowLeft, X } from "lucide-react"
 
-import { AppLink } from "@/components/app-link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { caseStudies, caseStudiesPageIntro, company } from "@/lib/content"
+import { caseStudies, caseStudiesPageIntro } from "@/lib/content"
 import type { CaseStudy } from "@/lib/content"
 
 const fallbackThumbnail =
@@ -176,15 +175,6 @@ function CaseStudyDetail({
               ))}
             </ul>
           </div>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="pill" variant="creamPill">
-            <AppLink href="/#contact">Discuss your project</AppLink>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full">
-            <a href={`mailto:${company.email}`}>Contact Teknopact</a>
-          </Button>
         </div>
       </div>
     </motion.div>

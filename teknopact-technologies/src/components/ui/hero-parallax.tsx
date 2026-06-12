@@ -112,7 +112,7 @@ export function HeroParallax({
       ref={ref}
       className={cn(
         "relative flex h-[300vh] flex-col self-auto overflow-hidden pb-32 pt-0 antialiased [perspective:1000px] [transform-style:preserve-3d]",
-        "bg-gradient-to-b from-background via-background to-background",
+        "bg-gradient-to-b from-background via-background to-[color-mix(in_oklch,var(--muted)_18%,var(--background))]",
         className
       )}
     >

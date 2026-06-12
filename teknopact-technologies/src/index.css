@@ -352,12 +352,13 @@ a {
   inset-inline: 0;
   bottom: 0;
   z-index: 1;
-  height: 14rem;
+  height: 16rem;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    color-mix(in oklch, var(--primary) 3%, var(--background)) 55%,
-    color-mix(in oklch, var(--primary) 5%, var(--background)) 100%
+    color-mix(in oklch, var(--primary) 2%, var(--background)) 40%,
+    color-mix(in oklch, var(--primary) 3%, var(--background)) 70%,
+    var(--background) 100%
   );
 }
 
@@ -365,7 +366,51 @@ a {
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    color-mix(in oklch, var(--primary) 4%, var(--background)) 55%,
-    color-mix(in oklch, var(--primary) 6%, var(--background)) 100%
+    color-mix(in oklch, var(--primary) 3%, var(--background)) 40%,
+    color-mix(in oklch, var(--primary) 5%, var(--background)) 70%,
+    var(--background) 100%
+  );
+}
+
+/* Hero → content handoff — faint blue eases into page background */
+.home-hero-exit-fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklch, var(--primary) 4%, transparent) 18%,
+    color-mix(in oklch, var(--muted) 22%, var(--background)) 48%,
+    color-mix(in oklch, var(--muted) 35%, var(--background)) 72%,
+    var(--background) 100%
+  );
+}
+
+.dark .home-hero-exit-fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklch, var(--primary) 8%, transparent) 18%,
+    color-mix(in oklch, var(--muted) 28%, var(--background)) 48%,
+    color-mix(in oklch, var(--muted) 42%, var(--background)) 72%,
+    var(--background) 100%
+  );
+}
+
+.home-content-entry-fade {
+  background: linear-gradient(
+    to bottom,
+    var(--background) 0%,
+    color-mix(in oklch, var(--muted) 20%, var(--background)) 35%,
+    color-mix(in oklch, var(--muted) 8%, var(--background)) 65%,
+    var(--background) 100%
+  );
+}
+
+.dark .home-content-entry-fade {
+  background: linear-gradient(
+    to bottom,
+    var(--background) 0%,
+    color-mix(in oklch, var(--muted) 24%, var(--background)) 35%,
+    color-mix(in oklch, var(--muted) 10%, var(--background)) 65%,
+    var(--background) 100%
   );
 }
