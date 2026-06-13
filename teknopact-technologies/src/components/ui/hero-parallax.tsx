@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { useNavigate } from "react-router-dom"
 import {
   motion,
   useScroll,
@@ -17,6 +18,7 @@ export type ParallaxProduct = {
   description?: string
   link: string
   thumbnail: string
+  categoryId?: string
 }
 
 export type HeroParallaxHeaderProps = {
@@ -166,23 +168,32 @@ export function ProductCard({
   product: ParallaxProduct
   translate: MotionValue<number>
 }) {
+  const navigate = useNavigate()
+
   return (
     <motion.div
       style={{ x: translate }}
       whileHover={{ y: -20 }}
-      className="group/product relative h-80 w-72 shrink-0 md:h-96 md:w-[30rem]"
+      onClick={() => navigate(product.link)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          navigate(product.link)
+        }
+      }}
+      className="group/product relative h-80 w-72 shrink-0 cursor-pointer md:h-96 md:w-[30rem]"
+      tabIndex={0}
+      role="button"
+      aria-label={`View case studies for ${product.title}`}
     >
-      <a
-        href={product.link}
-        className="block overflow-hidden rounded-2xl border border-border shadow-lg transition-shadow group-hover/product:shadow-2xl"
-      >
+      <div className="block h-full w-full overflow-hidden rounded-2xl border border-border shadow-lg transition-shadow group-hover/product:shadow-2xl">
         <img
           src={product.thumbnail}
           width={600}
           height={600}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-left-top"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           alt={product.title}
           onError={(e) => {
             const target = e.currentTarget
@@ -191,7 +202,7 @@ export function ProductCard({
               "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
           }}
         />
-      </a>
+      </div>
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-black/40" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl group-hover/product:hidden">
         <span className="max-w-[85%] text-center text-base font-semibold text-white sm:text-lg">

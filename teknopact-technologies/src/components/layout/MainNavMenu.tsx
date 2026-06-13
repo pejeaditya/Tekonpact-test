@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { ChevronDown, ChevronRight } from "lucide-react"
 
 import { AppLink } from "@/components/app-link"
 import {
@@ -72,19 +74,38 @@ export function MobileMainNav({
   linkClassName = "rounded-lg px-3 py-3 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground",
   serviceLinkClassName = "rounded-lg px-3 py-2.5 pl-6 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground",
 }: MobileMainNavProps) {
+  const [servicesOpen, setServicesOpen] = useState(false)
+
   return (
     <nav className="flex flex-col gap-2">
       {navLinks.map((link) =>
         link.label === "Services" ? (
-          <div key={link.label} className="flex flex-col gap-1">
-            <AppLink href="/services" className={cn(linkClassName, "font-medium text-foreground")}>
+          <div key={link.label}>
+            <button
+              type="button"
+              onClick={() => setServicesOpen(!servicesOpen)}
+              className={cn(
+                linkClassName,
+                "flex w-full items-center justify-between font-medium text-foreground"
+              )}
+            >
               Services
-            </AppLink>
-            {productMenuItems.map((item) => (
-              <AppLink key={item.title} href="/services" className={serviceLinkClassName}>
-                {item.title}
-              </AppLink>
-            ))}
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform",
+                  servicesOpen ? "rotate-180" : ""
+                )}
+              />
+            </button>
+            {servicesOpen ? (
+              <div className="mt-1 ml-2 flex flex-col gap-1 border-l-2 border-border/60 pl-2">
+                {productMenuItems.map((item) => (
+                  <AppLink key={item.title} href="/services" className={serviceLinkClassName}>
+                    {item.title}
+                  </AppLink>
+                ))}
+              </div>
+            ) : null}
           </div>
         ) : (
           <AppLink key={link.label} href={link.href} className={linkClassName}>

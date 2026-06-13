@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
-import { ChevronRight, Search, X } from "lucide-react"
+import { ChevronDown, ChevronRight, Search, X } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -55,13 +55,19 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null)
+  const [visibleCount, setVisibleCount] = useState(8)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setSelectedCategory("all")
     setSearchQuery("")
     setSelectedItem(null)
+    setVisibleCount(8)
   }, [mode])
+
+  useEffect(() => {
+    setVisibleCount(8)
+  }, [selectedCategory, searchQuery])
 
   useEffect(() => {
     document.body.style.overflow = selectedItem ? "hidden" : ""
@@ -83,6 +89,9 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
 
     return matchesCategory && matchesSearch
   })
+
+  const visibleItems = filteredItems.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredItems.length
 
   return (
     <div ref={containerRef} className="min-h-screen w-full bg-background">
@@ -167,7 +176,12 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
 
       <div className="mx-auto w-full max-w-7xl px-6 py-12 pb-20 sm:px-10 lg:px-12">
         <p className="mb-8 text-lg text-muted-foreground">
-          Showing <span className="text-2xl font-bold text-primary">{filteredItems.length}</span> {mode}
+          Showing{" "}
+          <span className="text-2xl font-bold text-primary">
+            {visibleItems.length}
+            {hasMore ? ` of ${filteredItems.length}` : ""}
+          </span>{" "}
+          {mode}
           {searchQuery ? (
             <span>
               {" "}
@@ -177,7 +191,7 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
         </p>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6">
-          {filteredItems.map((item) => {
+          {visibleItems.map((item) => {
             const Icon = item.icon
 
             return (
@@ -223,6 +237,18 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
             )
           })}
         </div>
+
+        {hasMore ? (
+          <div className="mt-10 text-center">
+            <Button
+              onClick={() => setVisibleCount((prev) => prev + 8)}
+              className="group rounded-full px-8 py-6 text-base shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40"
+            >
+              Show More
+              <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+            </Button>
+          </div>
+        ) : null}
 
         {filteredItems.length === 0 ? (
           <div className="py-20 text-center">

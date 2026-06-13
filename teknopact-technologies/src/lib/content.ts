@@ -331,19 +331,6 @@ export const sectorAccordionItems = [
   },
 ]
 
-/** Hero parallax cards — sector focus industries (15 slots = 3 scrolling rows × 5) */
-const HERO_PARALLAX_ROW_COUNT = 15
-
-export const heroParallaxProducts = Array.from({ length: HERO_PARALLAX_ROW_COUNT }, (_, index) => {
-  const sector = sectorAccordionItems[index % sectorAccordionItems.length]
-  return {
-    title: sector.title,
-    description: sector.description,
-    link: "#contact",
-    thumbnail: sector.imageUrl,
-  }
-})
-
 export type ServiceSubItem = {
   id: string
   title: string
@@ -709,6 +696,8 @@ export type CaseStudy = {
   description: string
   highlights: string[]
   thumbnail: string
+  /** Product category ID this case study relates to (mapped in caseStudyCategoryMap) */
+  relatedCategory?: string
 }
 
 export const productsPageIntro = {
@@ -740,6 +729,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "For the Education and Training Qualifications Authority—automating institution reviews (DSR, DHR, DVR) from physical visits to a cloud-based, real-time platform. Single dashboard for evaluation analysis and end-to-end review.",
     highlights: ["Eliminates physical meetings", "Single platform", "Cloud automation"],
+    relatedCategory: "ai-ml",
     thumbnail:
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -750,6 +740,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "Delivered customized ERP and CRM modules for clients in Qatar and Bahrain—commercial services, management services, transportation, and restaurant management solutions.",
     highlights: ["Integrated suites", "Industry-specific modules"],
+    relatedCategory: "enterprise-ops",
     thumbnail:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -760,6 +751,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "Built tailored websites for IT, sanitizer/e-commerce, marketing, and management consulting companies—simplifying technology and driving customer engagement.",
     highlights: ["E-commerce portals", "Case study showcases", "Custom brand experiences"],
+    relatedCategory: "specialized-verticals",
     thumbnail:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -770,6 +762,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "Eight-month delivery of a conferencing platform with peer-to-peer video, multiuser conferencing, and live whiteboard—used across EduTech, medical, and entertainment sectors.",
     highlights: ["Android, iOS & Web", "Slot booking & payments", "Europe psychic-reading platform"],
+    relatedCategory: "cyber-infra",
     thumbnail:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -780,6 +773,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "A global manufacturer replaced subjective visual quality control and reactive maintenance with Ingenious Tech's Vision AI, Fogwind Smart Factory telemetry, and PlantOps MES—achieving total supply chain transparency and improved equipment effectiveness.",
     highlights: ["Automated defect detection", "Predictive maintenance", "Reduced cycle times"],
+    relatedCategory: "iot-manufacturing",
     thumbnail:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -790,6 +784,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "A large telecom provider deployed NetoAI's ViNG and NAPI platforms with Teleindia infrastructure support—enabling zero-touch service activations, automated ticket triaging, and domain-specific LLM remediations with drastically reduced downtime.",
     highlights: ["Zero-touch activation", "TSLAM remediation", "High-availability infra"],
+    relatedCategory: "cyber-infra",
     thumbnail:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&h=600&q=80",
   },
@@ -824,6 +819,45 @@ export const caseStudies: CaseStudy[] = [
       "https://images.unsplash.com/photo-1550751827-4bd374c1f58b?auto=format&fit=crop&w=1200&h=600&q=80",
   },
 ]
+
+/** Map case study IDs to product category IDs for hero card filtering */
+export const caseStudyCategoryMap: Record<string, string> = {
+  "review-management-system": "ai-ml",
+  "custom-erp-crm": "enterprise-ops",
+  "website-creation-portfolio": "specialized-verticals",
+  "webrtc-conferencing": "cyber-infra",
+  "manufacturing-ai-efficiency": "iot-manufacturing",
+  "telecom-intelligence": "cyber-infra",
+  "fintech-autonomous-ops": "ai-ml",
+  "esg-strategic-execution": "enterprise-ops",
+  "secure-digital-transformation": "cyber-infra",
+}
+
+/** Hero parallax cards — case studies with Indian/Arabic face imagery, 15 slots (3 scrolling rows × 5) */
+const HERO_PARALLAX_ROW_COUNT = 15
+
+const heroCaseStudyImages: string[] = [
+  "https://images.unsplash.com/photo-1758518729058-b158e71c5a9b?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1758691737646-79dbce8e25fb?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1600880292203-757bb62b4fae?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
+]
+
+export const heroParallaxProducts = Array.from({ length: HERO_PARALLAX_ROW_COUNT }, (_, index) => {
+  const cs = caseStudies[index % caseStudies.length]
+  return {
+    title: cs.title,
+    description: cs.description,
+    link: `/case-studies?study=${cs.id}`,
+    thumbnail: heroCaseStudyImages[index % heroCaseStudyImages.length],
+    categoryId: cs.id,
+  }
+})
 
 export const customerTestimonials = [
   {
