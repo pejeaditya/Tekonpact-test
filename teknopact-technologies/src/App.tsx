@@ -12,6 +12,10 @@ const CaseStudiesPage = lazy(() =>
   import("@/pages/CaseStudiesPage").then((m) => ({ default: m.CaseStudiesPage }))
 )
 
+const CaseStudyDetailPage = lazy(() =>
+  import("@/pages/CaseStudyDetailPage").then((m) => ({ default: m.CaseStudyDetailPage }))
+)
+
 function App() {
   return (
     <>
@@ -23,6 +27,7 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/case-studies/:studyId" element={<CaseStudyDetailPage />} />
         </Routes>
       </Suspense>
     </>

@@ -3,6 +3,7 @@ import { Quote } from "lucide-react"
 import { motion } from "motion/react"
 
 import { AppLink } from "@/components/app-link"
+import { CaseStudyCard } from "@/components/sections/case-study-card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
@@ -12,7 +13,9 @@ import { CircularTestimonials } from "@/components/ui/circular-testimonials"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
 import { WorldMap } from "@/components/ui/map"
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1"
+import { getAllCaseStudies } from "@/lib/case-studies"
 import {
+  caseStudiesPageIntro,
   customerTestimonials,
   expertisePillars,
   faqs,
@@ -180,7 +183,49 @@ export function HomeBelowFold() {
         </div>
       </HomeSectionBand>
 
-      <HomeSectionBand variant="neutral">
+      <HomeSectionBand variant="neutral" id="case-studies">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <motion.div
+            className="mx-auto max-w-2xl text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
+              Case studies
+            </Badge>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              Measurable outcomes at scale
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">
+              {caseStudiesPageIntro.headline}
+            </p>
+          </motion.div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {getAllCaseStudies().slice(0, 6).map((study, index) => (
+              <motion.div
+                key={study.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <CaseStudyCard study={study} />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Button asChild variant="outline" className="rounded-full border-border px-6">
+              <AppLink href="/case-studies">Explore all {getAllCaseStudies().length} case studies</AppLink>
+            </Button>
+          </div>
+        </div>
+      </HomeSectionBand>
+
+      <HomeSectionBand variant="primary">
         <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
           <Quote className="mx-auto size-10 text-primary" />
           <blockquote className="mt-6 text-balance text-2xl font-medium leading-tight text-foreground sm:text-3xl">

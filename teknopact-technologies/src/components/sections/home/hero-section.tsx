@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { Menu } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -15,7 +16,8 @@ import {
 } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { brand } from "@/lib/brand"
-import { company, heroParallaxProducts } from "@/lib/content"
+import { getHeroParallaxProducts } from "@/lib/case-studies"
+import { company } from "@/lib/content"
 
 function HeroParallaxNav() {
   return (
@@ -79,6 +81,8 @@ function HeroParallaxNav() {
 }
 
 export function HeroSection() {
+  const heroParallaxProducts = useMemo(() => getHeroParallaxProducts(), [])
+
   return (
     <section id="home" className="relative bg-background">
       <HeroParallaxNav />

@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react"
-import { AnimatePresence, motion } from "motion/react"
-import { ArrowLeft, X } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
+import { ChevronDown } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
+import { CaseStudyCard } from "@/components/sections/case-study-card"
 import { Button } from "@/components/ui/button"
-import { caseStudies, caseStudiesPageIntro } from "@/lib/content"
-import type { CaseStudy } from "@/lib/content"
+import { getAllCaseStudies } from "@/lib/case-studies"
+import { caseStudiesPageIntro } from "@/lib/content"
 
-const fallbackThumbnail =
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=1600&q=80"
+const INITIAL_VISIBLE = 9
+const SHOW_MORE_STEP = 9
 
 /** Display name for product category IDs */
 const categoryDisplayNames: Record<string, string> = {
@@ -19,30 +19,32 @@ const categoryDisplayNames: Record<string, string> = {
   "specialized-verticals": "Specialized Verticals",
 }
 
-export function CaseStudiesShowcase({ defaultCategory, defaultStudy }: { defaultCategory?: string; defaultStudy?: string }) {
-  const [selectedStudy, setSelectedStudy] = useState<CaseStudy | null>(null)
+export function CaseStudiesShowcase({
+  defaultCategory,
+  defaultStudy,
+}: {
+  defaultCategory?: string
+  defaultStudy?: string
+}) {
+  const navigate = useNavigate()
+  const caseStudies = getAllCaseStudies()
   const [activeCategory, setActiveCategory] = useState<string | undefined>(defaultCategory)
-
-  useEffect(() => {
-    document.body.style.overflow = selectedStudy ? "hidden" : ""
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [selectedStudy])
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE)
 
   useEffect(() => {
     setActiveCategory(defaultCategory)
   }, [defaultCategory])
 
-  // Auto-open a study from URL param
   useEffect(() => {
     if (defaultStudy) {
-      const study = caseStudies.find((cs) => cs.id === defaultStudy)
-      if (study) setSelectedStudy(study)
+      navigate(`/case-studies/${defaultStudy}`, { replace: true })
     }
-  }, [defaultStudy])
+  }, [defaultStudy, navigate])
 
-  // Collect unique categories for the filter bar
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE)
+  }, [activeCategory])
+
   const allCategories = useMemo(() => {
     const cats = new Set<string>()
     caseStudies.forEach((cs) => {
@@ -55,6 +57,9 @@ export function CaseStudiesShowcase({ defaultCategory, defaultStudy }: { default
     if (!activeCategory) return caseStudies
     return caseStudies.filter((cs) => cs.relatedCategory === activeCategory)
   }, [activeCategory])
+
+  const visibleStudies = filteredStudies.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredStudies.length
 
   return (
     <div className="w-full bg-background">
@@ -81,49 +86,45 @@ export function CaseStudiesShowcase({ defaultCategory, defaultStudy }: { default
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 pt-4 pb-8 sm:px-10 lg:px-12">
-        {defaultCategory ? (
-          <div className="mb-8">
-            <div className="flex flex-wrap items-center gap-3">
+      <section className="relative mx-auto w-full max-w-7xl px-6 pt-4 pb-16 sm:px-10 lg:px-12">
+        <div className="mb-8">
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setActiveCategory(undefined)}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                !activeCategory
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              }`}
+            >
+              All ({caseStudies.length})
+            </button>
+            {allCategories.map((cat) => (
               <button
-                onClick={() => setActiveCategory(undefined)}
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                  !activeCategory
+                  activeCategory === cat
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
               >
-                All Case Studies
+                {categoryDisplayNames[cat] ?? cat}
               </button>
-              {allCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    activeCategory === cat
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:bg-muted/80"
-                  }`}
-                >
-                  {categoryDisplayNames[cat] ?? cat}
-                </button>
-              ))}
-            </div>
-            {activeCategory ? (
-              <p className="mt-4 text-sm text-muted-foreground">
-                Showing case studies for{" "}
-                <span className="font-semibold text-foreground">
-                  {categoryDisplayNames[activeCategory] ?? activeCategory}
-                </span>
-              </p>
-            ) : null}
+            ))}
           </div>
-        ) : null}
+          {activeCategory ? (
+            <p className="mt-4 text-sm text-muted-foreground">
+              Showing case studies for{" "}
+              <span className="font-semibold text-foreground">
+                {categoryDisplayNames[activeCategory] ?? activeCategory}
+              </span>
+            </p>
+          ) : null}
+        </div>
 
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background sm:h-32"
-          aria-hidden
-        />
         {filteredStudies.length === 0 ? (
           <div className="flex min-h-[30vh] flex-col items-center justify-center text-center">
             <p className="text-lg font-medium text-foreground">No case studies found</p>
@@ -139,134 +140,42 @@ export function CaseStudiesShowcase({ defaultCategory, defaultStudy }: { default
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {filteredStudies.map((study) => (
-              <article
-                key={study.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => setSelectedStudy(study)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault()
-                    setSelectedStudy(study)
-                  }
-                }}
-                className="group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-2xl ring-1 ring-foreground/10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <img
-                  src={study.thumbnail}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  onError={(event) => {
-                    event.currentTarget.onerror = null
-                    event.currentTarget.src = fallbackThumbnail
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
-                <Badge className="absolute top-4 left-4 rounded-full border-0 bg-black px-3 py-1 text-xs font-medium text-white">
-                  Case Study
-                </Badge>
-                <div className="absolute right-0 bottom-0 left-0 p-6">
-                  <p className="text-sm font-medium text-white/75">
-                    Teknopact · {study.category}
-                  </p>
-                  <h3 className="mt-2 line-clamp-3 text-2xl font-bold leading-tight text-white sm:text-[1.65rem]">
-                    {study.title}
-                  </h3>
-                </div>
-              </article>
-            ))}
-          </div>
+          <>
+            <p className="mb-8 text-lg text-muted-foreground">
+              Showing{" "}
+              <span className="text-2xl font-bold text-primary">
+                {visibleStudies.length}
+                {hasMore ? ` of ${filteredStudies.length}` : ""}
+              </span>{" "}
+              case studies
+            </p>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {visibleStudies.map((study) => (
+                <Link
+                  key={study.id}
+                  to={`/case-studies/${study.id}`}
+                  className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <CaseStudyCard study={study} />
+                </Link>
+              ))}
+            </div>
+
+            {hasMore ? (
+              <div className="mt-10 text-center">
+                <Button
+                  onClick={() => setVisibleCount((prev) => prev + SHOW_MORE_STEP)}
+                  className="group rounded-full px-8 py-6 text-base shadow-lg shadow-primary/20 transition-all hover:shadow-primary/40"
+                >
+                  Show More
+                  <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                </Button>
+              </div>
+            ) : null}
+          </>
         )}
       </section>
-
-      <AnimatePresence>
-        {selectedStudy ? (
-          <CaseStudyDetail study={selectedStudy} onClose={() => setSelectedStudy(null)} />
-        ) : null}
-      </AnimatePresence>
     </div>
-  )
-}
-
-function CaseStudyDetail({
-  study,
-  onClose,
-}: {
-  study: CaseStudy
-  onClose: () => void
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-background"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="case-study-detail-title"
-    >
-      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/60 bg-background/90 px-6 py-4 backdrop-blur-xl sm:px-10">
-        <Button variant="ghost" onClick={onClose} className="gap-2 rounded-full">
-          <ArrowLeft className="h-4 w-4" />
-          Back to case studies
-        </Button>
-        <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close" className="rounded-full">
-          <X className="h-5 w-5" />
-        </Button>
-      </div>
-
-      <div className="relative min-h-[50vh] overflow-hidden">
-        <img
-          src={study.thumbnail}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          onError={(event) => {
-            event.currentTarget.onerror = null
-            event.currentTarget.src = fallbackThumbnail
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
-        <div className="relative mx-auto flex min-h-[50vh] w-full max-w-7xl flex-col justify-end px-6 py-14 sm:px-10 lg:px-12">
-          <Badge className="mb-4 w-fit rounded-full border-0 bg-black px-3 py-1 text-xs font-medium text-white">
-            Case Study
-          </Badge>
-          <p className="text-sm font-medium text-white/80">Teknopact · {study.category}</p>
-          <h2 id="case-study-detail-title" className="mt-3 max-w-4xl text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-            {study.title}
-          </h2>
-        </div>
-      </div>
-
-      <div className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-16 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div>
-            <h3 className="mb-4 text-sm font-semibold tracking-[0.2em] text-primary uppercase">
-              Overview
-            </h3>
-            <p className="text-lg leading-8 text-foreground/90">{study.description}</p>
-          </div>
-          <div>
-            <h3 className="mb-4 text-sm font-semibold tracking-[0.2em] text-primary uppercase">
-              Key outcomes
-            </h3>
-            <ul className="space-y-3">
-              {study.highlights.map((highlight) => (
-                <li
-                  key={highlight}
-                  className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-foreground"
-                >
-                  {highlight}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </motion.div>
   )
 }
