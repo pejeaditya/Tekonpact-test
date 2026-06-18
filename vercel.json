@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd teknopact-technologies && npm ci && npm run build",
+  "outputDirectory": "teknopact-technologies/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
