@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { ArrowLeft } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import type { CaseStudy } from "@/lib/case-studies"
 import { cn } from "@/lib/utils"
 
@@ -37,7 +38,7 @@ type CaseStudyArticleProps = {
 export function CaseStudyArticle({
   study,
   backHref = "/case-studies",
-  backLabel = "Back to case studies",
+  backLabel = "Case studies",
 }: CaseStudyArticleProps) {
   const [activeSection, setActiveSection] = useState(study.sections[0]?.id ?? "challenge")
   const heroStats = study.highlights.slice(0, 2).map(parseHighlightStat)
@@ -68,19 +69,19 @@ export function CaseStudyArticle({
 
   return (
     <article className="w-full bg-background">
-      <div className="border-b border-border/60 bg-background/95">
-        <div className="mx-auto flex w-full max-w-7xl items-center px-6 py-4 sm:px-10 lg:px-12">
-          <Link
-            to={backHref}
-            className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
+      <header className="mx-auto w-full max-w-7xl px-6 pt-8 pb-8 sm:px-10 sm:pt-12 lg:px-12">
+        <Button
+          variant="outline"
+          size="sm"
+          className="mb-8 h-9 gap-2 rounded-full border-border/70 bg-background/90 px-4 shadow-sm backdrop-blur-sm hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
+          asChild
+        >
+          <Link to={backHref}>
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover/button:-translate-x-0.5" />
             {backLabel}
           </Link>
-        </div>
-      </div>
+        </Button>
 
-      <header className="mx-auto w-full max-w-7xl px-6 pt-10 pb-8 sm:px-10 sm:pt-14 lg:px-12">
         <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Case study</p>
         <h1 className="mt-4 max-w-5xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl lg:leading-[1.08]">
           {study.title}
