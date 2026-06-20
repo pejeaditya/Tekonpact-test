@@ -92,36 +92,31 @@ export const whyTeknopactAccordionItems = [
     id: 1,
     title: whyTeknopact[0].title,
     description: whyTeknopact[0].description,
-    imageUrl:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/why-teknopact/diverse-market-experience.jpg",
   },
   {
     id: 2,
     title: whyTeknopact[1].title,
     description: whyTeknopact[1].description,
-    imageUrl:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/why-teknopact/strategic-engagements.jpg",
   },
   {
     id: 3,
     title: whyTeknopact[2].title,
     description: whyTeknopact[2].description,
-    imageUrl:
-      "https://images.unsplash.com/photo-1521737716121-8aaf04847d81?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/why-teknopact/proven-delivery.jpg",
   },
   {
     id: 4,
     title: whyTeknopact[3].title,
     description: whyTeknopact[3].description,
-    imageUrl:
-      "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/why-teknopact/regional-presence.jpg",
   },
   {
     id: 5,
     title: whyTeknopact[4].title,
     description: whyTeknopact[4].description,
-    imageUrl:
-      "https://images.unsplash.com/photo-1600880292203-757bb62b4fae?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/why-teknopact/satisfied-clients.jpg",
   },
 ]
 
@@ -172,8 +167,8 @@ export const offices = [
   },
   {
     country: "Saudi Arabia",
-    address: "Moon Tower, King Fahed Branch Road, Riyadh",
-    tel: "+966 56727 5757",
+    address: "Riyadh City Al Izdihar, District RHZA2667, Riyadh",
+    mob: "+966 55 231 6923",
   },
   {
     country: "Oman",
@@ -648,36 +643,46 @@ export const serviceClusterImages: Record<string, string> = {
   bpm: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
 }
 
-export const teamMembers = [
+export type TeamMember = {
+  name: string
+  role: string
+  bio: string
+  initials: string
+  imageUrl: string
+  badge?: string
+  featured?: boolean
+}
+
+export const teamMembers: TeamMember[] = [
   {
     name: "Haresh Shukla",
     role: "Director | Teknopact Operations & CEO",
-    bio: "Partner and Sr. Director managing operational activities and project deliveries across the region. 18+ years in IT Consulting, Capital Markets, Strategic & Management Advisory, and HR Advisory.",
+    badge: "FOUNDER",
+    featured: true,
+    bio: "Haresh is a partner and Sr. Director at Teknopact Technologies; he manages the operational activities of Teknopact as well as oversees project deliveries across the region. He has over 18 years of professional work experience in the fields of IT Consulting and Capital Markets, Strategic & Management Advisory as well as HR Advisory.",
     initials: "HS",
     imageUrl: "/team/haresh-shukla.png",
   },
   {
-    name: "Ramesh Kumar",
-    role: "Founder & Deputy CEO",
-    bio: "20+ years spanning Sales, Business Development, Research & Consulting, Growth Strategies, and Operations Management.",
-    initials: "RK",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1368&q=80",
+    name: "Irfan Ahmed Jagral",
+    role: "CSO",
+    bio: "Irfan is a proactive, performance-driven professional with 25+ years' progressive expertise in leadership and problem solving for Manufacturing, Trading & Retail, BFSI, Construction, Services, and startup operations in Middle East with operation and sales in KSA, UAE, Bahrain, Kuwait, Oman, India.",
+    initials: "IJ",
+    imageUrl: "/team/irfan-ahmed-jagral.png",
+  },
+  {
+    name: "Anilavo Dutta",
+    role: "CCO",
+    bio: "Anilavo is a strategic digital transformation leader with 19+ years of international experience across 15 countries, specializing in business strategy, innovation, and M&A. He excels at designing people-centric digital strategies aligned to business goals, leading post-merger integrations, and driving agile enterprise transformation.",
+    initials: "AD",
+    imageUrl: "/team/anilavo-dutta.png",
   },
   {
     name: "Suresh K Jangir",
     role: "CTO",
-    bio: "Technology enthusiast specialized in mobile & web programming with 10+ years building scalable, carrier-grade distributed applications and Android/iOS development.",
+    bio: "A result-oriented technology enthusiast specialized on mobile & web programming using java and related technologies. Suresh has more than 10 years experience in Java based scalable, carrier-grade, high performing and distributed web application and android/iOS based mobile application development.",
     initials: "SJ",
     imageUrl: "/team/suresh-k-jangir.jpg",
-  },
-  {
-    name: "Irfan Ahmed Jagral",
-    role: "CSO",
-    bio: "25+ years of leadership across Manufacturing, Trading & Retail, BFSI, Construction, and startup operations in the Middle East (KSA, UAE, Bahrain, Kuwait, Oman, India).",
-    initials: "IJ",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1368&q=80",
   },
 ]
 
@@ -689,16 +694,43 @@ export const teamCircularTestimonials = teamMembers.map((member) => ({
   src: member.imageUrl,
 }))
 
-export type CaseStudy = {
-  id: string
-  category: string
-  title: string
-  description: string
-  highlights: string[]
-  thumbnail: string
-  /** Product category ID this case study relates to (mapped in caseStudyCategoryMap) */
-  relatedCategory?: string
-}
+export const companyLogos = [
+  { src: "/company_logos/ACTIVE.png", alt: "Active" },
+  { src: "/company_logos/Aegros.png", alt: "Aegros" },
+  { src: "/company_logos/ALMESWAK.png", alt: "Al Meswak" },
+  { src: "/company_logos/AL_ABANOS.png", alt: "Al Abanos" },
+  { src: "/company_logos/AMIANTIT.png", alt: "Amiantit" },
+  { src: "/company_logos/ATCO.png", alt: "ATCO" },
+  { src: "/company_logos/CRIF.png", alt: "CRIF" },
+  { src: "/company_logos/dun_and_bradstreet.png", alt: "Dun & Bradstreet" },
+  { src: "/company_logos/EAST.png", alt: "East" },
+  { src: "/company_logos/HEBA.png", alt: "Heba" },
+  { src: "/company_logos/Heenat_Salma_Farm.png", alt: "Heenat Salma Farm" },
+  { src: "/company_logos/KNeo_MEDIA.png", alt: "KNeo Media" },
+  { src: "/company_logos/Larissa_Gardens.png", alt: "Larissa Gardens" },
+  { src: "/company_logos/MTM_Group.ico", alt: "MTM Group" },
+  { src: "/company_logos/Netlinkz.png", alt: "Netlinkz" },
+  { src: "/company_logos/PhysioTrio.ico", alt: "PhysioTrio" },
+  { src: "/company_logos/snoonu.png", alt: "Snoonu" },
+]
+
+/** Key client logos extracted from the corporate profile (public & private sector). */
+const keyClientLogoFiles = [
+  "image227.jpg", "image228.png", "image229.jpg", "image230.jpg", "image231.png",
+  "image232.png", "image233.png", "image234.png", "image235.png", "image236.jpg",
+  "image237.png", "image238.jpg", "image239.png", "image240.png", "image241.png",
+  "image242.png", "image243.jpg", "image244.png", "image245.png", "image246.png",
+  "image247.png", "image248.png", "image249.png", "image250.jpg", "image251.jpg",
+  "image252.png", "image253.jpg", "image254.jpg", "image255.png", "image256.jpg",
+  "image257.jpg", "image258.jpg", "image259.jpg", "image260.png", "image261.png",
+  "image262.png", "image263.png", "image264.png", "image265.png", "image266.png",
+  "image267.jpg", "image268.png", "image269.png", "image270.png",
+]
+
+export const keyClientLogos = keyClientLogoFiles.map((file, index) => ({
+  src: `/key_clients/${file}`,
+  alt: `Teknopact key client ${index + 1}`,
+}))
 
 export const productsPageIntro = {
   headline:
@@ -716,148 +748,10 @@ export const servicesPageIntro = {
 
 export const caseStudiesPageIntro = {
   headline:
-    "Challenges? Accepted. A curated selection of Teknopact engagements—from education and ERP to telecom, fintech, and cybersecurity.",
+    "Measurable outcomes across telecom, transportation, e-commerce, manufacturing, and enterprise AI—from £135M in recovered savings to 98% visual restoration accuracy.",
   body:
-    "The more demanding the brief, the more we are in our element. On every project we question assumptions and rethink what is possible—sometimes reinventing our own approach. The goal is always to deliver outcomes that surprise: with passion, deep expertise, and measurable impact—whatever the sector, wherever the location.",
+    "Each engagement follows the same arc: a complex operational challenge, a purpose-built solution, and impact you can quantify. Explore how Teknopact partners deliver cognitive oversight, edge AI, IoT precision, and governed automation at global scale.",
 }
-
-export const caseStudies: CaseStudy[] = [
-  {
-    id: "review-management-system",
-    category: "Education & Training",
-    title: "Review Management System (RMS)",
-    description:
-      "For the Education and Training Qualifications Authority—automating institution reviews (DSR, DHR, DVR) from physical visits to a cloud-based, real-time platform. Single dashboard for evaluation analysis and end-to-end review.",
-    highlights: ["Eliminates physical meetings", "Single platform", "Cloud automation"],
-    relatedCategory: "ai-ml",
-    thumbnail:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "custom-erp-crm",
-    category: "ERP & CRM",
-    title: "Custom ERP & CRM Modules",
-    description:
-      "Delivered customized ERP and CRM modules for clients in Qatar and Bahrain—commercial services, management services, transportation, and restaurant management solutions.",
-    highlights: ["Integrated suites", "Industry-specific modules"],
-    relatedCategory: "enterprise-ops",
-    thumbnail:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "website-creation-portfolio",
-    category: "Digital",
-    title: "Website Creation Portfolio",
-    description:
-      "Built tailored websites for IT, sanitizer/e-commerce, marketing, and management consulting companies—simplifying technology and driving customer engagement.",
-    highlights: ["E-commerce portals", "Case study showcases", "Custom brand experiences"],
-    relatedCategory: "specialized-verticals",
-    thumbnail:
-      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "webrtc-conferencing",
-    category: "Telecom",
-    title: "WebRTC Conferencing Platform",
-    description:
-      "Eight-month delivery of a conferencing platform with peer-to-peer video, multiuser conferencing, and live whiteboard—used across EduTech, medical, and entertainment sectors.",
-    highlights: ["Android, iOS & Web", "Slot booking & payments", "Europe psychic-reading platform"],
-    relatedCategory: "cyber-infra",
-    thumbnail:
-      "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "manufacturing-ai-efficiency",
-    category: "Manufacturing & IoT",
-    title: "AI-Driven Operational Efficiency in Manufacturing",
-    description:
-      "A global manufacturer replaced subjective visual quality control and reactive maintenance with Ingenious Tech's Vision AI, Fogwind Smart Factory telemetry, and PlantOps MES—achieving total supply chain transparency and improved equipment effectiveness.",
-    highlights: ["Automated defect detection", "Predictive maintenance", "Reduced cycle times"],
-    relatedCategory: "iot-manufacturing",
-    thumbnail:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "telecom-intelligence",
-    category: "Telecom",
-    title: "Scaling Telecom Intelligence and Network Orchestration",
-    description:
-      "A large telecom provider deployed NetoAI's ViNG and NAPI platforms with Teleindia infrastructure support—enabling zero-touch service activations, automated ticket triaging, and domain-specific LLM remediations with drastically reduced downtime.",
-    highlights: ["Zero-touch activation", "TSLAM remediation", "High-availability infra"],
-    relatedCategory: "cyber-infra",
-    thumbnail:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "fintech-autonomous-ops",
-    category: "Fintech",
-    title: "Autonomous Business Operations in Fintech",
-    description:
-      "A fast-growing fintech aggregator automated its full loan lifecycle—from lead sourcing to payout—using Xpertnest's BharatEarns CRM and AiQmen's AgenticAxis, maintaining strict data protection compliance while boosting conversion rates.",
-    highlights: ["End-to-end loan automation", "Policy-compliant agents", "Scaled compliance"],
-    thumbnail:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "esg-strategic-execution",
-    category: "ESG & Strategy",
-    title: "Strategic Execution and ESG Compliance",
-    description:
-      "A global organization bridged the gap between boardroom strategy and ground-level execution using Cascade's OKR platform, while 4Seer Tech's 4Scope automated Scope 1–3 greenhouse gas reporting—transforming sustainability into a proactive imperative.",
-    highlights: ["Real-time OKR alignment", "Automated ESG reporting", "Data-backed leadership"],
-    thumbnail:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-  {
-    id: "secure-digital-transformation",
-    category: "Cybersecurity",
-    title: "Secure Digital Transformation in High-Security Environments",
-    description:
-      "A multinational corporation modernized legacy IT with Finesse's AI Transformation Roadmap, AI Guardrails & LLM Gateway, and Zero Trust architecture—supported by iValue Group's 24/7 SOC—enabling safe adoption of generative AI without compromising data integrity.",
-    highlights: ["Zero Trust architecture", "GenAI guardrails", "24/7 SOC coverage"],
-    thumbnail:
-      "https://images.unsplash.com/photo-1550751827-4bd374c1f58b?auto=format&fit=crop&w=1200&h=600&q=80",
-  },
-]
-
-/** Map case study IDs to product category IDs for hero card filtering */
-export const caseStudyCategoryMap: Record<string, string> = {
-  "review-management-system": "ai-ml",
-  "custom-erp-crm": "enterprise-ops",
-  "website-creation-portfolio": "specialized-verticals",
-  "webrtc-conferencing": "cyber-infra",
-  "manufacturing-ai-efficiency": "iot-manufacturing",
-  "telecom-intelligence": "cyber-infra",
-  "fintech-autonomous-ops": "ai-ml",
-  "esg-strategic-execution": "enterprise-ops",
-  "secure-digital-transformation": "cyber-infra",
-}
-
-/** Hero parallax cards — case studies with Indian/Arabic face imagery, 15 slots (3 scrolling rows × 5) */
-const HERO_PARALLAX_ROW_COUNT = 15
-
-const heroCaseStudyImages: string[] = [
-  "https://images.unsplash.com/photo-1758518729058-b158e71c5a9b?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1758691737646-79dbce8e25fb?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600880292203-757bb62b4fae?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
-]
-
-export const heroParallaxProducts = Array.from({ length: HERO_PARALLAX_ROW_COUNT }, (_, index) => {
-  const cs = caseStudies[index % caseStudies.length]
-  return {
-    title: cs.title,
-    description: cs.description,
-    link: `/case-studies?study=${cs.id}`,
-    thumbnail: heroCaseStudyImages[index % heroCaseStudyImages.length],
-    categoryId: cs.id,
-  }
-})
 
 export const customerTestimonials = [
   {

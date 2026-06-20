@@ -1,27 +1,24 @@
 import type { ReactNode } from "react"
-import { Quote } from "lucide-react"
 import { motion } from "motion/react"
 
 import { AppLink } from "@/components/app-link"
 import { CaseStudyCard } from "@/components/sections/case-study-card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CircularTestimonials } from "@/components/ui/circular-testimonials"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
+import { LogoMarquee } from "@/components/ui/logo-marquee"
 import { WorldMap } from "@/components/ui/map"
-import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1"
 import { getAllCaseStudies } from "@/lib/case-studies"
 import {
   caseStudiesPageIntro,
-  customerTestimonials,
   expertisePillars,
   faqs,
+  keyClientLogos,
   presenceMapDots,
   teamCircularTestimonials,
-  testimonial,
   whyTeknopactAccordionItems,
 } from "@/lib/content"
 import { cn } from "@/lib/utils"
@@ -54,14 +51,10 @@ function HomeSectionBand({
 }
 
 export function HomeBelowFold() {
-  const firstColumn = customerTestimonials.slice(0, 3)
-  const secondColumn = customerTestimonials.slice(3, 6)
-  const thirdColumn = customerTestimonials.slice(6, 9)
-
   return (
-    <div className="relative -mt-28 bg-background pt-28 sm:-mt-36 sm:pt-36">
+    <div className="relative -mt-16 bg-background pt-16 sm:-mt-20 sm:pt-20 lg:-mt-28 lg:pt-28">
       <div
-        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-28 h-36 sm:-top-36 sm:h-44"
+        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-16 h-24 sm:-top-20 sm:h-28 lg:-top-28 lg:h-36"
         aria-hidden
       />
       <section className="relative overflow-hidden bg-background py-16 sm:py-24">
@@ -204,7 +197,7 @@ export function HomeBelowFold() {
           </motion.div>
 
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {getAllCaseStudies().slice(0, 6).map((study, index) => (
+            {getAllCaseStudies().slice(0, 9).map((study, index) => (
               <motion.div
                 key={study.id}
                 initial={{ opacity: 0, y: 24 }}
@@ -225,51 +218,26 @@ export function HomeBelowFold() {
         </div>
       </HomeSectionBand>
 
-      <HomeSectionBand variant="primary">
-        <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
-          <Quote className="mx-auto size-10 text-primary" />
-          <blockquote className="mt-6 text-balance text-2xl font-medium leading-tight text-foreground sm:text-3xl">
-            &ldquo;{testimonial.quote}&rdquo;
-          </blockquote>
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <Avatar>
-              <AvatarFallback className="bg-primary text-primary-foreground">TT</AvatarFallback>
-            </Avatar>
-            <div className="text-left">
-              <p className="text-sm font-medium text-foreground">{testimonial.name}</p>
-              <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-            </div>
-          </div>
-        </div>
-      </HomeSectionBand>
-
-      <HomeSectionBand variant="primary" className="overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="mx-auto flex max-w-[540px] flex-col items-center justify-center text-center">
-            <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
-              Customer testimonials
-            </Badge>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              Satisfied clients across the region
-            </h2>
-          </div>
-
-          <div className="relative mx-auto mt-10 max-h-[740px]">
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-background via-background/70 to-transparent backdrop-blur-[6px]"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-background via-background/70 to-transparent backdrop-blur-[6px]"
-              aria-hidden
-            />
-            <div className="flex max-h-[740px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.4)_6%,black_14%,black_86%,rgba(0,0,0,0.4)_94%,transparent_100%)]">
-              <TestimonialsColumn testimonials={firstColumn} duration={15} />
-              <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-              <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
-            </div>
-          </div>
-        </div>
+      <HomeSectionBand variant="primary" id="clients" className="overflow-hidden">
+        <motion.div
+          className="mx-auto mb-10 max-w-2xl px-5 text-center sm:mb-12 sm:px-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
+            Key clients
+          </Badge>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Trusted by 200+ organizations
+          </h2>
+          <p className="mt-4 text-base leading-7 text-muted-foreground">
+            From pivotal government agencies to leading private enterprises across the GCC and beyond—a snapshot of the
+            public and private sector clients we partner with.
+          </p>
+        </motion.div>
+        <LogoMarquee logos={keyClientLogos} rows={3} />
       </HomeSectionBand>
 
       <HomeSectionBand variant="neutral" id="faq">
@@ -286,7 +254,7 @@ export function HomeBelowFold() {
               <AppLink href="/#contact">Contact Teknopact</AppLink>
             </Button>
           </div>
-          <Accordion type="single" collapsible className="rounded-3xl border border-border px-5">
+          <Accordion type="single" collapsible className="rounded-3xl border border-border pl-7 pr-5 sm:pl-8 sm:pr-6">
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`item-${index}`} className="border-border">
                 <AccordionTrigger className="text-left text-foreground">{faq.question}</AccordionTrigger>
