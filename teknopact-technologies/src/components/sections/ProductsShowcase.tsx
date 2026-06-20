@@ -44,26 +44,56 @@ const catalogByMode = {
   },
 } as const
 
+const showcaseCardPalette = [
+  { bg: "#1B4965", light: false },
+  { bg: "#5FA8D3", light: false },
+  { bg: "#62B6CB", light: false },
+  { bg: "#CAE9FF", light: true },
+  { bg: "#BEE9E8", light: true },
+] as const
+
+/** Interleaved order so adjacent cards alternate dark / mid / light tones */
+const showcaseCardOrder = [0, 3, 1, 4, 2]
+
+function getShowcaseCardStyle(index: number) {
+  return showcaseCardPalette[showcaseCardOrder[index % showcaseCardOrder.length]]
+}
+
 function useCatalogData(mode: CatalogMode) {
   return useMemo(() => catalogByMode[mode], [mode])
 }
 
-export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
+function resolveCategoryFilter(categories: { id: string }[], category?: string) {
+  if (category && categories.some((entry) => entry.id === category)) {
+    return category
+  }
+  return "all"
+}
+
+export function ProductsShowcase({
+  mode,
+  defaultCategory,
+}: {
+  mode: CatalogMode
+  defaultCategory?: string
+}) {
   const { categories, items } = useCatalogData(mode)
   const copy = modeCopy[mode]
 
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedCategory, setSelectedCategory] = useState(() =>
+    resolveCategoryFilter(categories, defaultCategory)
+  )
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null)
   const [visibleCount, setVisibleCount] = useState(8)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setSelectedCategory("all")
+    setSelectedCategory(resolveCategoryFilter(categories, defaultCategory))
     setSearchQuery("")
     setSelectedItem(null)
     setVisibleCount(8)
-  }, [mode])
+  }, [mode, defaultCategory, categories])
 
   useEffect(() => {
     setVisibleCount(8)
@@ -148,7 +178,6 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
             </button>
 
             {categories.map((category) => {
-              const Icon = category.icon
               const count = items.filter((item) => item.category === category.id).length
 
               return (
@@ -157,16 +186,13 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
                   type="button"
                   onClick={() => setSelectedCategory(category.id)}
                   className={cn(
-                    "flex shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors",
+                    "shrink-0 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors",
                     selectedCategory === category.id
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                   )}
                 >
-                  <Icon className="h-4 w-4" />
-                  <span>
-                    {category.name} ({count})
-                  </span>
+                  {category.name} ({count})
                 </button>
               )
             })}
@@ -191,8 +217,11 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
         </p>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6">
-          {visibleItems.map((item) => {
-            const Icon = item.icon
+          {visibleItems.map((item, index) => {
+            const cardStyle = getShowcaseCardStyle(index)
+            const textClass = cardStyle.light ? "text-[#1B4965]" : "text-white"
+            const textMutedClass = cardStyle.light ? "text-[#1B4965]/75" : "text-white/75"
+            const textSoftClass = cardStyle.light ? "text-[#1B4965]/85" : "text-white/85"
 
             return (
               <article
@@ -206,33 +235,29 @@ export function ProductsShowcase({ mode }: { mode: CatalogMode }) {
                     setSelectedItem(item)
                   }
                 }}
-                className="group relative flex cursor-pointer flex-col rounded-2xl border border-border/70 bg-card shadow-sm transition-all duration-300 hover:z-10 hover:-translate-y-0.5 hover:border-border hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20"
+                style={{ backgroundColor: cardStyle.bg }}
+                className={cn(
+                  "relative flex cursor-pointer flex-col overflow-hidden rounded-2xl ring-1 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5FA8D3]/50",
+                  cardStyle.light ? "ring-[#1B4965]/15" : "ring-white/15",
+                  textClass
+                )}
               >
-                  <div className="flex flex-1 flex-col p-5 sm:p-6">
-                    <div className="flex items-start justify-between gap-3">
-                      <Badge className="rounded-full border-0 bg-foreground px-2.5 py-0.5 text-[0.65rem] font-medium text-background">
-                        {mode === "products" ? "Product" : "Service"}
-                      </Badge>
-                      <div className="rounded-xl border border-border/60 bg-muted/40 p-2">
-                        <Icon className="h-4 w-4 text-foreground/80" />
-                      </div>
-                    </div>
-
-                    <p className="mt-4 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                <div className="relative flex flex-1 flex-col p-5 sm:p-6">
+                    <p className={cn("text-xs font-medium tracking-wide uppercase", textMutedClass)}>
                       Teknopact · {item.categoryName}
                     </p>
-                    <h3 className="mt-2 line-clamp-2 text-xl font-bold leading-snug text-foreground transition-[color] duration-300 group-hover:line-clamp-none sm:text-[1.35rem]">
+                    <h3 className={cn("mt-2 line-clamp-2 text-xl font-bold leading-snug sm:text-[1.35rem]", textClass)}>
                       {item.name}
                     </h3>
-                    <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground transition-[color] duration-300 group-hover:line-clamp-none">
+                    <p className={cn("mt-3 line-clamp-3 flex-1 text-sm leading-relaxed", textSoftClass)}>
                       {item.description}
                     </p>
 
-                    <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-foreground transition-all group-hover:gap-2">
+                    <span className={cn("mt-5 inline-flex items-center gap-1 text-sm font-medium", textClass)}>
                       View details
                       <ChevronRight className="h-4 w-4" />
                     </span>
-                  </div>
+                </div>
               </article>
             )
           })}

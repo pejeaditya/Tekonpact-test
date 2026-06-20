@@ -842,7 +842,7 @@ export const faqs = [
 
 /** @deprecated Use serviceClusters — kept for header menu compatibility */
 export const productMenuItems = serviceClusters.map((cluster) => ({
+  id: cluster.id,
   title: cluster.title,
   description: cluster.summary,
-  icon: cluster.icon,
 }))
