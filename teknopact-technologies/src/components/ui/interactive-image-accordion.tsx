@@ -124,8 +124,8 @@ export function InteractiveImageAccordion({
 
   return (
     <div className={cn("bg-background", className)}>
-      <div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-12">
-        <div className="w-full text-center lg:w-[42%] lg:text-left">
+      <div className="flex flex-col items-center justify-between gap-10 xl:flex-row xl:gap-12">
+        <div className="w-full text-center xl:w-[42%] xl:text-left">
           {badge ? (
             <Badge
               variant="secondary"
@@ -142,7 +142,7 @@ export function InteractiveImageAccordion({
           >
             {title}
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-muted-foreground lg:mx-0">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-muted-foreground xl:mx-0">
             {description}
           </p>
 
@@ -153,17 +153,17 @@ export function InteractiveImageAccordion({
           </div>
         </div>
 
-        <div className="w-full lg:w-[58%]">
-          <div className="relative lg:static">
+        <div className="w-full xl:w-[58%]">
+          <div className="relative xl:static">
             {showRightFade ? (
               <div
-                className="pointer-events-none absolute inset-y-0 right-0 z-20 w-7 bg-[linear-gradient(to_left,color-mix(in_oklch,var(--background)_28%,transparent)_0%,color-mix(in_oklch,var(--background)_12%,transparent)_55%,transparent_100%)] lg:hidden"
+                className="pointer-events-none absolute inset-y-0 right-0 z-20 w-7 bg-[linear-gradient(to_left,color-mix(in_oklch,var(--background)_28%,transparent)_0%,color-mix(in_oklch,var(--background)_12%,transparent)_55%,transparent_100%)] xl:hidden"
                 aria-hidden
               />
             ) : null}
             <div
               ref={scrollRef}
-              className="teknopact-scrollbar flex flex-row items-stretch justify-start gap-2 overflow-x-auto scroll-smooth scroll-px-2 px-1 py-2 sm:gap-3 sm:px-2 lg:justify-center lg:overflow-visible"
+              className="teknopact-scrollbar flex flex-row items-stretch justify-start gap-2 overflow-x-auto scroll-smooth scroll-px-2 px-1 py-2 sm:gap-3 sm:px-2 xl:justify-center xl:overflow-visible"
             >
               {items.map((item, index) => (
                 <AccordionPanel

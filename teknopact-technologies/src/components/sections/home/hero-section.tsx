@@ -87,7 +87,7 @@ export function HeroSection() {
     <section id="home" className="relative bg-background">
       <HeroParallaxNav />
       <div
-        className="home-hero-exit-fade pointer-events-none absolute inset-x-0 bottom-0 z-10 h-56 sm:h-72 md:h-80"
+        className="home-hero-exit-fade pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-56 sm:h-56 xl:h-64"
         aria-hidden
       />
       <HeroParallax
@@ -97,7 +97,7 @@ export function HeroSection() {
             badge={company.tagline}
             title={company.heroTitle}
             subtitle={company.heroSubtitle}
-            className="!pb-2 pt-24 md:!pb-4 md:pt-28"
+            className="home-hero-header !pb-2 pt-24 xl:!pb-4 xl:pt-28"
             actions={
               <>
                 <Button asChild className="rounded-full">

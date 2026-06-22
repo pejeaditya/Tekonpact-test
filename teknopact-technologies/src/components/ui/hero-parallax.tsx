@@ -39,7 +39,7 @@ export function HeroParallaxHeader({
   return (
     <div
       className={cn(
-        "relative mx-auto w-full max-w-7xl px-4 pb-4 pt-20 md:pb-6 md:pt-28",
+        "relative mx-auto w-full max-w-7xl px-4 pb-4 pt-20 xl:pb-6 xl:pt-28",
         className
       )}
     >
@@ -51,10 +51,10 @@ export function HeroParallaxHeader({
           {badge}
         </Badge>
       ) : null}
-      <h1 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
+      <h1 className="home-hero-title text-balance text-3xl font-bold tracking-tight text-foreground lg:text-6xl xl:text-7xl">
         {title}
       </h1>
-      <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-xl md:leading-8">
+      <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground lg:text-xl lg:leading-8">
         {subtitle}
       </p>
       {actions ? (
@@ -105,7 +105,7 @@ export function HeroParallax({
     springConfig
   )
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-480, 500]),
+    useTransform(scrollYProgress, [0, 0.2, 0.38], [-480, 120, 360]),
     springConfig
   )
 
@@ -113,7 +113,7 @@ export function HeroParallax({
     <div
       ref={ref}
       className={cn(
-        "relative flex h-[300vh] flex-col self-auto overflow-hidden pb-32 pt-0 antialiased [perspective:1000px] [transform-style:preserve-3d]",
+        "home-hero-parallax relative flex h-[300vh] flex-col self-auto overflow-hidden pb-32 pt-0 antialiased [perspective:1000px] [transform-style:preserve-3d] sm:pb-24 xl:pb-48 2xl:pb-52",
         "bg-gradient-to-b from-background via-background to-[color-mix(in_oklch,var(--muted)_18%,var(--background))]",
         className
       )}
@@ -129,7 +129,7 @@ export function HeroParallax({
         />
       )}
       <motion.div
-        className="-mt-8 md:-mt-12"
+        className="relative z-[2] -mt-8 lg:-mt-12"
         style={{
           rotateX,
           rotateZ,
@@ -137,7 +137,7 @@ export function HeroParallax({
           opacity,
         }}
       >
-        <motion.div className="mb-12 flex flex-row-reverse space-x-20 space-x-reverse md:mb-16">
+        <motion.div className="mb-12 flex flex-row-reverse space-x-20 space-x-reverse lg:mb-16">
           {firstRow.map((product) => (
             <ProductCard product={product} translate={translateX} key={product.title} />
           ))}
@@ -181,7 +181,7 @@ export function ProductCard({
           navigate(product.link)
         }
       }}
-      className="group/product relative h-80 w-72 shrink-0 cursor-pointer md:h-96 md:w-[30rem]"
+      className="group/product relative h-80 w-72 shrink-0 cursor-pointer xl:h-96 xl:w-[30rem]"
       tabIndex={0}
       role="button"
       aria-label={`View case studies for ${product.title}`}

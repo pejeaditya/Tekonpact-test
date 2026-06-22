@@ -52,13 +52,13 @@ function HomeSectionBand({
 
 export function HomeBelowFold() {
   return (
-    <div className="relative -mt-16 bg-background pt-16 sm:-mt-20 sm:pt-20 lg:-mt-28 lg:pt-28">
+    <div className="home-below-fold relative -mt-16 bg-background pt-16 sm:-mt-24 sm:pt-24 xl:-mt-24 xl:pt-24">
       <div
-        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-16 h-24 sm:-top-20 sm:h-28 lg:-top-28 lg:h-36"
+        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-16 h-24 sm:-top-24 sm:h-32 xl:-top-24 xl:h-32"
         aria-hidden
       />
-      <section className="relative overflow-hidden bg-background py-16 sm:py-24">
-        <div className="home-section-bridge sm:h-64" aria-hidden />
+      <section className="home-why-teknopact-section relative overflow-hidden bg-background py-16 sm:pt-12 sm:pb-20 xl:py-24">
+        <div className="home-section-bridge sm:h-48 xl:h-64" aria-hidden />
         <div className="relative z-[2] mx-auto max-w-7xl px-5 sm:px-8">
           <InteractiveImageAccordion
             badge="Why Teknopact?"
