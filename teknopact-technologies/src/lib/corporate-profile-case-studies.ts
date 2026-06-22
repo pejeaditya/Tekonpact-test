@@ -47,7 +47,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The new RMS delivers a single dashboard for evaluation analysis and a single platform to manage the review process end to end—making reviews faster, more efficient, and more accurate while eliminating redundant physical workflows.",
     highlights: ["End-to-end review process on one platform","Eliminated Excel and word-based forms","Real-time cloud access for evaluators"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/etqa-review-management-system.jpg",
+    thumbnail: "https://unsplash.com/photos/lUaaKCUANVI/download?w=1080",
   }),
   study({
     id: "qatar-commercial-erp-crm",
@@ -62,7 +62,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The client gained a tailored business management foundation with industry best practices, latest technology, and modules that extend beyond standard ERP limitations including evaluation, training, document management, and cross-system integration.",
     highlights: ["Custom ERP & CRM modules","Integrated suite capabilities","End-to-end business management"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/qatar-commercial-erp-crm.jpg",
+    thumbnail: "https://unsplash.com/photos/JKUTrJ4vK00/download?w=1080",
   }),
   study({
     id: "bahrain-management-erp-crm",
@@ -77,7 +77,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The organization operates on a single platform aligned to Teknopact ERP design, development, and deployment standards—replacing siloed processes with an integrated operational backbone.",
     highlights: ["Integrated ERP & CRM suite","Process standardization","Scalable operations platform"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/bahrain-management-erp-crm.jpg",
+    thumbnail: "https://unsplash.com/photos/ylx85nvunvw/download?w=1080",
   }),
   study({
     id: "bahrain-transportation-erp-crm",
@@ -92,7 +92,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The client gained end-to-end visibility and control over transportation operations through an integrated ERP and CRM foundation.",
     highlights: ["Transportation business management system","ERP & CRM integration","Operational visibility"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/bahrain-transportation-erp-crm.jpg",
+    thumbnail: "https://unsplash.com/photos/jXGqPnVATpQ/download?w=1080",
   }),
   study({
     id: "bahrain-restaurant-erp-crm",
@@ -107,7 +107,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The client runs restaurant operations on an integrated platform designed for hospitality workflows rather than generic ERP templates.",
     highlights: ["Restaurant management solution","Integrated ERP & CRM","Streamlined F&B operations"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/bahrain-restaurant-erp-crm.jpg",
+    thumbnail: "https://unsplash.com/photos/c9PVCgZCZto/download?w=1080",
   }),
   study({
     id: "website-it-company",
@@ -122,7 +122,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The client gained a compelling digital presence that communicates capabilities clearly and supports business development.",
     highlights: ["Customized client requirements","Simplified technology messaging","Professional web presence"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/WebsiteCreationIllustrative.jpg",
+    thumbnail: "/case-studies/WebsiteCreationIllustrative.svg",
   }),
   study({
     id: "website-sanitizer-ecommerce",
@@ -137,7 +137,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The company launched a customer-ready digital storefront that combines education, trust-building, and transactional capability in one experience.",
     highlights: ["Integrated ecommerce portal","Product benefit communication","Seamless shopping experience"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/WebsiteCreationIllustrative2.jpg",
+    thumbnail: "/case-studies/WebsiteCreationIllustrative2.svg",
   }),
   study({
     id: "website-marketing-company",
@@ -152,7 +152,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The marketing firm gained a polished digital platform that reflects its creative capabilities and supports client acquisition.",
     highlights: ["Interactive design","Select web hosting provider","Compelling client-centric content"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/website-marketing-company.jpg",
+    thumbnail: "https://unsplash.com/photos/CbGyIn1uwuc/download?w=1080",
   }),
   study({
     id: "website-consulting-company",
@@ -167,7 +167,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The consulting firm strengthened its credibility with a website that mirrors the rigor of its advisory work.",
     highlights: ["High-precision service detail","Case study showcase","Executive-grade presentation"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/website-consulting-company.jpg",
+    thumbnail: "https://unsplash.com/photos/bEBLQQPhqi8/download?w=1080",
   }),
   study({
     id: "hocalwire-journalism-cms",
@@ -182,7 +182,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Media organizations operate on a unified CMS that supports the full editorial and monetization lifecycle with remote workforce coordination.",
     highlights: ["Four pillars of journalism","Remote reporter management","Ongoing since 2016"],
     relatedCategory: "ai-ml",
-    thumbnail: "/case-studies/hocalwire-journalism-cms.jpg",
+    thumbnail: "https://unsplash.com/photos/VUC00c_tk0Y/download?w=1080",
   }),
   study({
     id: "webrtc-conferencing-platform",
@@ -197,7 +197,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The platform enabled live phone and text reading services at scale, giving users access to hundreds of trusted psychics with enterprise-grade real-time infrastructure.",
     highlights: ["WebRTC calling","Slot booking & payments","Cross-industry deployment"],
     relatedCategory: "cyber-infra",
-    thumbnail: "/case-studies/webrtc-conferencing-platform.jpg",
+    thumbnail: "https://unsplash.com/photos/sl91Zszc8zA/download?w=1080",
   }),
   study({
     id: "medical-education-conferencing",
@@ -212,7 +212,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The solution was acquired by Blackboard, then the market leader in online education, validating its instructional quality and scalability.",
     highlights: ["Global student connectivity","Live whiteboard in video sessions","Acquired by Blackboard"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/medical-education-conferencing.jpg",
+    thumbnail: "https://unsplash.com/photos/Pd4lRfKo16U/download?w=1080",
   }),
   study({
     id: "retail-marketing-management-app",
@@ -227,7 +227,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Marketing teams gained data-driven visibility into store-level campaigns, improving allocation and accountability across the retail network.",
     highlights: ["Store-level branding tracking","Marketing ROI by product line","Ten-month delivery"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/retail-marketing-management-app.jpg",
+    thumbnail: "https://unsplash.com/photos/YDde9egYzhw/download?w=1080",
   }),
   study({
     id: "sip-voip-application-server",
@@ -242,7 +242,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Operators accelerated VoIP service delivery with a proven application server foundation and extensible VAS development capability.",
     highlights: ["Carrier-grade SIP server","Custom value-added services","Ten-month engagement"],
     relatedCategory: "cyber-infra",
-    thumbnail: "/case-studies/sip-voip-application-server.jpg",
+    thumbnail: "https://unsplash.com/photos/vE5AKQRUs7c/download?w=1080",
   }),
   study({
     id: "saudi-staff-augmentation-platform",
@@ -257,7 +257,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "HR and finance teams operate on dedicated platforms supporting multi-year workforce and credit operations.",
     highlights: ["Five-year staff platform","Credit management for finance","Saudi Arabia delivery"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/saudi-staff-augmentation-platform.jpg",
+    thumbnail: "https://unsplash.com/photos/rmzF0er-JeY/download?w=1080",
   }),
   study({
     id: "saudi-sap-service-industry",
@@ -272,7 +272,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The group unified operations on SAP with standardized processes across entities and departments.",
     highlights: ["Complete SAP implementation","Multi-company rollout","Eight-month engagement"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/saudi-sap-service-industry.jpg",
+    thumbnail: "https://unsplash.com/photos/phS1wAgXOQI/download?w=1080",
   }),
   study({
     id: "saudi-fire-safety-vat",
@@ -287,7 +287,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Finance and audit teams gained aligned VAT and audit frameworks across the group within a compressed timeline.",
     highlights: ["Group VAT policy","Process flow design","Four-month delivery"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/saudi-fire-safety-vat.jpg",
+    thumbnail: "https://unsplash.com/photos/EL16ACtwLxg/download?w=1080",
   }),
   study({
     id: "bahrain-tyres-vat-policy",
@@ -302,7 +302,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The organization achieved compliant, documented VAT operations with consistent group-wide procedures.",
     highlights: ["Group VAT policy","Detailed process implementation","Twelve-month engagement"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/bahrain-tyres-vat-policy.jpg",
+    thumbnail: "https://unsplash.com/photos/vKNRKjSNbTo/download?w=1080",
   }),
   study({
     id: "gcc-dental-order-patient-platform",
@@ -317,7 +317,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Clinical and operational teams gained unified patient and order workflows without losing continuity from legacy systems.",
     highlights: ["Order management system","Patient management system","Legacy process integration"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/gcc-dental-order-patient-platform.jpg",
+    thumbnail: "https://unsplash.com/photos/L8tWZT4CcVQ/download?w=1080",
   }),
   study({
     id: "saudi-property-management-software",
@@ -332,7 +332,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Property operations are managed on a unified platform supporting group-level visibility and control.",
     highlights: ["Property management software","Group-wide rollout","End-to-end solutions"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/saudi-property-management-software.jpg",
+    thumbnail: "https://unsplash.com/photos/lotxjfRcx80/download?w=1080",
   }),
   study({
     id: "saudi-civil-engineering-gap-assessment",
@@ -347,7 +347,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Leadership received a clear baseline for remediation and investment prioritization across group IT systems.",
     highlights: ["Group-wide gap assessment","System audit","Six-month engagement"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/saudi-civil-engineering-gap-assessment.jpg",
+    thumbnail: "https://unsplash.com/photos/Mqc-m8kgxkg/download?w=1080",
   }),
   study({
     id: "india-ncdex-trading-system",
@@ -362,7 +362,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Exchanges and clearing entities gained stable live operations, new market capabilities, and measurably faster batch cycles.",
     highlights: ["28 months live trading support","SPOT market delivery","Batch process optimization"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/india-ncdex-trading-system.jpg",
+    thumbnail: "https://unsplash.com/photos/8Bm5eH5w7FE/download?w=1080",
   }),
   study({
     id: "china-ngcnyts-trading-system",
@@ -377,7 +377,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The NGCNYTS program gained reliable SSO, disciplined release cadence, and deep operational support across a mission-critical national trading platform.",
     highlights: ["SSO for 14 markets","25–30 version releases","Two-year engagement"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/china-ngcnyts-trading-system.jpg",
+    thumbnail: "https://unsplash.com/photos/T1snPsRIvfk/download?w=1080",
   }),
   study({
     id: "india-system-design-consulting",
@@ -392,7 +392,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Clients entered implementation with validated requirements and architecture, reducing rework and delivery risk.",
     highlights: ["Requirements gathering","Architectural planning","Twelve-month program"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/india-system-design-consulting.jpg",
+    thumbnail: "https://unsplash.com/photos/0godtCEIrkQ/download?w=1080",
   }),
   study({
     id: "india-investment-bank-kyc",
@@ -407,7 +407,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "The bank established a compliant KYC foundation on an accelerated timeline using iterative delivery practices.",
     highlights: ["First KYC system","Agile methodology","Ten-month delivery"],
     relatedCategory: "specialized-verticals",
-    thumbnail: "/case-studies/india-investment-bank-kyc.jpg",
+    thumbnail: "https://unsplash.com/photos/4mEyvORkbN0/download?w=1080",
   }),
   study({
     id: "gcc-professional-services-it-advisory",
@@ -422,7 +422,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Clients gained evidence-based workforce and sector strategies plus operational IT foundations for regional offices.",
     highlights: ["1200+ ICT roles mapped","Dubai ICT landscape report","Cybersecurity feasibility in Qatar"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/gcc-professional-services-it-advisory.jpg",
+    thumbnail: "https://unsplash.com/photos/XplX5vASmkM/download?w=1080",
   }),
   study({
     id: "gcc-it-strategy-transformation",
@@ -437,7 +437,7 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Clients gained board-ready strategy artifacts, implemented operating rhythms, and HR systems aligned to growth and capital market objectives.",
     highlights: ["Five-year KSA IT strategy","Performance management frameworks","IPO-readiness roadmap"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/gcc-it-strategy-transformation.jpg",
+    thumbnail: "https://unsplash.com/photos/G7Mg0jgC4Es/download?w=1080",
   }),
   study({
     id: "gcc-digital-transformation-advisory",
@@ -452,6 +452,6 @@ export const corporateProfileCaseStudies: CaseStudy[] = [
     impact: "Clients advanced funding decisions, vendor selections, and transformation programs with independent, execution-ready advisory deliverables.",
     highlights: ["45-case ICT impact assessment","Healthcare HIMS evaluation","Digital maturity for bank SMEs"],
     relatedCategory: "enterprise-ops",
-    thumbnail: "/case-studies/gcc-digital-transformation-advisory.jpg",
+    thumbnail: "https://unsplash.com/photos/s8_cIpx7uRE/download?w=1080",
   })
 ]

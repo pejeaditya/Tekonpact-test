@@ -1,4 +1,4 @@
-import { ultimateCaseStudies } from "@/lib/ultimate-case-studies"
+import { corporateProfileCaseStudies } from "@/lib/corporate-profile-case-studies"
 
 export type CaseStudySection = {
   id: string
@@ -202,7 +202,7 @@ function buildFlagshipSections(study: Omit<CaseStudy, "sections">): CaseStudySec
   ]
 }
 
-const allCaseStudies: CaseStudy[] = [...flagshipCaseStudies, ...ultimateCaseStudies]
+const allCaseStudies: CaseStudy[] = corporateProfileCaseStudies
 
 export function getAllCaseStudies(): CaseStudy[] {
   return allCaseStudies
