@@ -137,6 +137,7 @@ export function HeroParallax({
           opacity,
         }}
       >
+        {/*
         <motion.div className="mb-12 flex flex-row-reverse space-x-20 space-x-reverse lg:mb-16">
           {firstRow.map((product) => (
             <ProductCard product={product} translate={translateX} key={product.title} />
@@ -156,6 +157,7 @@ export function HeroParallax({
             <ProductCard product={product} translate={translateX} key={product.title} />
           ))}
         </motion.div>
+        */}
       </motion.div>
     </div>
   )

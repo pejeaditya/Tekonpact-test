@@ -17,18 +17,18 @@ const footerLinks = [
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="relative overflow-hidden bg-background">
+    <footer id="contact" className="relative overflow-hidden bg-background/85 backdrop-blur-md">
       <section className="relative overflow-hidden">
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent sm:h-40"
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background/85 to-transparent sm:h-40"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background/85 sm:h-40"
           aria-hidden
         />
         <div className="relative mx-auto max-w-7xl px-5 py-14 text-center sm:px-8 sm:py-20">

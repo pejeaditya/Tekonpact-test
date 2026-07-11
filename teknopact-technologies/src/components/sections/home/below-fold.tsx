@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { FileText, Package, Wrench } from "lucide-react"
 import { motion } from "motion/react"
 
 import { AppLink } from "@/components/app-link"
@@ -8,8 +9,11 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CircularTestimonials } from "@/components/ui/circular-testimonials"
+import { IndustriesShowcase } from "@/components/ui/industries-showcase"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
 import { LogoMarquee } from "@/components/ui/logo-marquee"
+import { OfferingsCarousel } from "@/components/ui/offerings-carousel"
+import { ProductsShowcaseSlider } from "@/components/ui/products-showcase-slider"
 import { WorldMap } from "@/components/ui/map"
 import { getAllCaseStudies } from "@/lib/case-studies"
 import {
@@ -18,6 +22,8 @@ import {
   faqs,
   keyClientLogos,
   presenceMapDots,
+  sectorFocus,
+  serviceClusters,
   teamCircularTestimonials,
   whyTeknopactAccordionItems,
 } from "@/lib/content"
@@ -50,14 +56,58 @@ function HomeSectionBand({
   )
 }
 
+const offerings = [
+  {
+    icon: Package,
+    title: "Products",
+    description:
+      "A curated catalog spanning AI, IoT, cybersecurity, and specialized vertical solutions from leading vendors.",
+    highlights: [
+      "65+ products across 5 categories — AI & Automation, Enterprise Strategy, IoT, Cyber, Specialized Verticals",
+      "Curated catalog of leading vendor technologies ready for deployment",
+      "Every product paired with the right implementation path for your constraints",
+    ],
+    cta: "See details",
+    href: "/products",
+  },
+  {
+    icon: Wrench,
+    title: "Services",
+    description:
+      "End-to-end capability across advisory, ERP, core banking, managed services, blockchain, and BPM.",
+    highlights: [
+      "6 service clusters covering ERP, Core Banking, Managed Services, Value Added, Blockchain & BPM",
+      "33 specialized sub-services from advisory & PMO to implementation, testing, and support",
+      "Consultants, architects, and engineers who simplify complexity and accelerate outcomes",
+    ],
+    cta: "See details",
+    href: "/services",
+  },
+  {
+    icon: FileText,
+    title: "Case Studies",
+    description:
+      "Measurable outcomes across telecom, transportation, e-commerce, manufacturing, and enterprise AI.",
+    highlights: [
+      "30+ documented engagements with quantified impact — from £135M savings to 98% accuracy gains",
+      "Deep coverage across Public Sector, Education, Healthcare, Telecom, Automotive, Manufacturing & Retail",
+      "Each case maps a complex challenge → purpose-built solution → measurable result",
+    ],
+    cta: "See details",
+    href: "/case-studies",
+  },
+]
+
+const sectorIndustries = sectorFocus.map((s) => ({ ...s }))
+
 export function HomeBelowFold() {
   return (
-    <div className="home-below-fold relative -mt-16 bg-background pt-16 sm:-mt-24 sm:pt-24 xl:-mt-24 xl:pt-24">
+    <div className="home-below-fold relative">
       <div
-        className="home-content-entry-fade pointer-events-none absolute inset-x-0 -top-16 h-24 sm:-top-24 sm:h-32 xl:-top-24 xl:h-32"
+        className="home-content-entry-fade pointer-events-none absolute inset-x-0 top-0 h-16 sm:h-20"
         aria-hidden
       />
-      <section className="home-why-teknopact-section relative overflow-hidden bg-background py-16 sm:pt-12 sm:pb-20 xl:py-24">
+      <section className="home-why-teknopact-section relative overflow-hidden py-16 sm:pt-12 sm:pb-20 xl:py-24">
         <div className="home-section-bridge sm:h-48 xl:h-64" aria-hidden />
         <div className="relative z-[2] mx-auto max-w-7xl px-5 sm:px-8">
           <InteractiveImageAccordion
@@ -71,6 +121,38 @@ export function HomeBelowFold() {
           />
         </div>
       </section>
+
+      <HomeSectionBand variant="neutral" id="offerings">
+        <motion.div
+          className="mx-auto mb-10 max-w-2xl text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
+            What we offer
+          </Badge>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Three pillars of Teknopact
+          </h2>
+          <p className="mt-4 text-base leading-7 text-muted-foreground">
+            Explore our product catalog, service capabilities, and real-world case studies—each a doorway into how we deliver impact.
+          </p>
+        </motion.div>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <OfferingsCarousel offerings={offerings} />
+        </div>
+      </HomeSectionBand>
+
+      <HomeSectionBand variant="primary" id="products-showcase" className="overflow-hidden">
+        <ProductsShowcaseSlider
+          clusters={serviceClusters}
+          ctaLabel="Explore all services"
+          ctaHref="/services"
+          interval={6000}
+        />
+      </HomeSectionBand>
 
       <HomeSectionBand variant="primary" id="features">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -143,6 +225,15 @@ export function HomeBelowFold() {
           <WorldMap dots={presenceMapDots} className="mt-8" />
         </div>
       </HomeSectionBand>
+
+{/*      <HomeSectionBand variant="neutral" id="industries">
+        <IndustriesShowcase
+          industries={sectorIndustries}
+          badge="Industries"
+          heading="Sectors we serve"
+          subtitle="Deep domain expertise across government, enterprise, and specialized verticals—delivering measurable impact in every sector."
+        />
+      </HomeSectionBand>*/}
 
       <HomeSectionBand
         variant="primary"

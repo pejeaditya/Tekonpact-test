@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 import { AppLink } from "@/components/app-link"
 import { DesktopMainNav, MobileMainNav } from "@/components/layout/MainNavMenu"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { prefetchHomeRoute } from "@/components/route-prefetch"
@@ -33,7 +32,6 @@ export function SiteHeader() {
         <BrandMark />
         <DesktopMainNav />
         <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle />
           <Button asChild className="rounded-full bg-primary px-5 text-primary-foreground hover:bg-primary/90">
             <AppLink href="/#contact">Contact Us</AppLink>
           </Button>
