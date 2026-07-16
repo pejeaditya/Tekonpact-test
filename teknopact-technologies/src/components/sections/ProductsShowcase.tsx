@@ -45,11 +45,11 @@ const catalogByMode = {
 } as const
 
 const showcaseCardPalette = [
-  { bg: "#1B4965", light: false },
-  { bg: "#5FA8D3", light: false },
-  { bg: "#62B6CB", light: false },
-  { bg: "#CAE9FF", light: true },
-  { bg: "#BEE9E8", light: true },
+  { bg: "rgba(27, 73, 101, 0.7)", light: false },
+  { bg: "rgba(95, 168, 211, 0.7)", light: false },
+  { bg: "rgba(98, 182, 203, 0.7)", light: false },
+  { bg: "rgba(202, 233, 255, 0.7)", light: true },
+  { bg: "rgba(190, 233, 232, 0.7)", light: true },
 ] as const
 
 /** Interleaved order so adjacent cards alternate dark / mid / light tones */
@@ -237,7 +237,7 @@ export function ProductsShowcase({
                 }}
                 style={{ backgroundColor: cardStyle.bg }}
                 className={cn(
-                  "relative flex cursor-pointer flex-col overflow-hidden rounded-2xl ring-1 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5FA8D3]/50",
+                  "relative flex cursor-pointer flex-col overflow-hidden rounded-2xl ring-1 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5FA8D3]/50",
                   cardStyle.light ? "ring-[#1B4965]/15" : "ring-white/15",
                   textClass
                 )}
