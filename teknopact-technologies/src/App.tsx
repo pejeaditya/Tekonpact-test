@@ -15,6 +15,7 @@ const CaseStudiesPage = lazy(() =>
 const CaseStudyDetailPage = lazy(() =>
   import("@/pages/CaseStudyDetailPage").then((m) => ({ default: m.CaseStudyDetailPage }))
 )
+const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })))
 
 /** Mount a single global IntersectionObserver that fires text animations
  *  on every [data-animate] element across all pages.
@@ -65,6 +66,7 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/:studyId" element={<CaseStudyDetailPage />} />
+          <Route path="/team" element={<TeamPage />} />
         </Routes>
       </Suspense>
     </>

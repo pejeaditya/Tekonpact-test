@@ -705,3 +705,18 @@ body {
     width: 100%;
   }
 }
+
+/* Moving Locations Marquee keyframes and animation utility class */
+@keyframes presence-marquee-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-presence-marquee {
+  animation: presence-marquee-x 35s linear infinite;
+}
+

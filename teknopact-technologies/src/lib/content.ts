@@ -45,6 +45,7 @@ export const navLinks = [
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "Our Team", href: "/team" },
 ]
 
 export const stats = [

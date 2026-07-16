@@ -1,5 +1,5 @@
-import type { ReactNode } from "react"
-import { FileText, Package, Wrench } from "lucide-react"
+import { type ReactNode } from "react"
+import { FileText, MapPin, Package, Phone, Wrench } from "lucide-react"
 import { motion } from "motion/react"
 
 import { AppLink } from "@/components/app-link"
@@ -7,25 +7,31 @@ import { CaseStudyCard } from "@/components/sections/case-study-card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { CircularTestimonials } from "@/components/ui/circular-testimonials"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
 import { LogoMarquee } from "@/components/ui/logo-marquee"
 import { OfferingsCarousel } from "@/components/ui/offerings-carousel"
 import { ProductsShowcaseSlider } from "@/components/ui/products-showcase-slider"
-import { WorldMap } from "@/components/ui/map"
 import { getAllCaseStudies } from "@/lib/case-studies"
 import {
   caseStudiesPageIntro,
   expertisePillars,
   faqs,
   keyClientLogos,
-  presenceMapDots,
+  offices,
   serviceClusters,
-  teamCircularTestimonials,
   whyTeknopactAccordionItems,
 } from "@/lib/content"
 import { cn } from "@/lib/utils"
+
+const officeImages: Record<string, string> = {
+  Bahrain: "https://images.unsplash.com/photo-1597176116047-876a32798fcc?auto=format&fit=crop&w=600&h=800&q=80",
+  Qatar: "https://images.unsplash.com/photo-1590059955799-a0a6d517865c?auto=format&fit=crop&w=600&h=800&q=80",
+  "United Arab Emirates": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&h=800&q=80",
+  "Saudi Arabia": "https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?auto=format&fit=crop&w=600&h=800&q=80",
+  Oman: "https://images.unsplash.com/photo-1614531341773-3bef8ca730ba?auto=format&fit=crop&w=600&h=800&q=80",
+  India: "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=600&h=800&q=80",
+  Canada: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=600&h=800&q=80",
+}
 
 type HomeBandVariant = "primary" | "neutral"
 
@@ -189,17 +195,17 @@ export function HomeBelowFold() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Badge variant="secondary" className="rounded-full border border-border bg-muted/60 text-muted-foreground">
+            <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary" data-animate="fade-in">
               Our expertise
             </Badge>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl" data-animate="letter-expand" data-delay="1">
               Built for complex challenges
             </h2>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">
+            <p className="mt-4 text-base leading-7 text-muted-foreground" data-animate="fade-up" data-delay="2">
               The world economy is transforming through ICT and data—we simplify complexities and deliver intelligent solutions.
             </p>
           </motion.div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {expertisePillars.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -207,28 +213,32 @@ export function HomeBelowFold() {
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                <Card
+                <div
                   className={cn(
-                    "group h-full border-border teknopact-card-gradient transition-all duration-300",
-                    "hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10",
-                    index === 1 && "border-primary/30 bg-primary/10"
+                    "group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border/40 bg-card/30 backdrop-blur-sm p-6 sm:p-8 transition-all duration-500 hover:-translate-y-2 hover:border-primary/45 hover:bg-card/55 hover:shadow-[0_20px_45px_rgba(98,176,255,0.08)]",
+                    index === 1 && "border-primary/30 bg-primary/5 hover:border-primary/50"
                   )}
                 >
-                  <CardHeader className="gap-3">
-                    <span className="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
+                  {/* Glowing Top Indicator Line */}
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary to-cyan-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  
+                  <div>
+                    {/* Icon Badge */}
+                    <div className="grid size-12 place-items-center rounded-2xl border border-primary/20 bg-primary/5 text-primary shadow-[0_0_15px_rgba(98,176,255,0.1)] transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_15px_rgba(98,176,255,0.4)]">
                       <feature.icon className="size-5" />
-                    </span>
-                    <CardTitle className="text-foreground transition-colors duration-300 group-hover:text-primary">
+                    </div>
+
+                    <h3 className="mt-5 text-xl font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
                       {feature.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-sm leading-6 text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-                    {feature.description}
-                  </CardContent>
-                </Card>
+                    </h3>
+                    
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -248,7 +258,73 @@ export function HomeBelowFold() {
               Seven countries. Five GCC offices plus India and Canada—local support with global delivery standards.
             </p>
           </div>
-          <WorldMap dots={presenceMapDots} className="mt-8" />
+
+          {/* <WorldMap dots={presenceMapDots} className="mt-8" /> */}
+
+          {/* MakeMyTrip-Style Infinite Moving Location Cards */}
+          <div className="relative mt-12 w-full overflow-hidden py-6">
+            {/* Edge fading mask gradients */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background via-background/60 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background via-background/60 to-transparent" />
+
+            <div className="flex w-max gap-8 animate-presence-marquee hover:[animation-play-state:paused] py-2">
+              {[...offices, ...offices].map((office, idx) => {
+                const imageUrl = officeImages[office.country] || "";
+                const city = office.address.split(",").pop()?.trim() || office.country;
+                return (
+                  <div
+                    key={`${office.country}-${idx}`}
+                    className="group relative h-[400px] w-[300px] shrink-0 overflow-hidden rounded-[2.2rem] border border-border/40 bg-card/30 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/45 hover:shadow-[0_20px_40px_rgba(98,176,255,0.15)]"
+                  >
+                    {/* Background image */}
+                    <img
+                      src={imageUrl}
+                      alt={office.country}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Dark gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/5 transition-opacity duration-300 group-hover:from-black/100 group-hover:via-black/45" />
+
+                    {/* Content overlays */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                      {/* Map Pin Badge */}
+                      <div className="mb-3 inline-flex items-center gap-1.5 self-start rounded-full bg-primary/20 border border-primary/30 px-3 py-1 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-md">
+                        <MapPin className="size-3 text-primary-foreground" />
+                        <span>{city}</span>
+                      </div>
+
+                      <h3 className="text-2xl font-bold tracking-tight text-white">{office.country}</h3>
+                      <p className="mt-2 text-xs leading-relaxed text-white/70 line-clamp-2 transition-colors duration-300 group-hover:text-white/85">
+                        {office.address}
+                      </p>
+
+                      <div className="mt-4 space-y-1.5 border-t border-white/10 pt-3 text-[11px] text-white/60 transition-all duration-300 group-hover:text-white/80">
+                        {office.tel && (
+                          <div className="flex items-center gap-2">
+                            <Phone className="size-3 text-primary-foreground/70" />
+                            <span>Tel: {office.tel}</span>
+                          </div>
+                        )}
+                        {office.mob && (
+                          <div className="flex items-center gap-2">
+                            <Phone className="size-3 text-primary-foreground/70" />
+                            <span>Mob: {office.mob}</span>
+                          </div>
+                        )}
+                        {!office.tel && !office.mob && office.fax && (
+                          <div className="flex items-center gap-2">
+                            <Phone className="size-3 text-primary-foreground/70" />
+                            <span>Fax: {office.fax}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </HomeSectionBand>
 
@@ -261,37 +337,7 @@ export function HomeBelowFold() {
         />
       </HomeSectionBand>*/}
 
-      <HomeSectionBand
-        variant="primary"
-        id="team"
-        className="py-8 sm:py-16 md:py-24 max-md:max-h-[100dvh] max-md:overflow-hidden"
-      >
-        <div className="mx-auto flex max-w-7xl flex-col px-4 max-md:max-h-[inherit] max-md:min-h-0 sm:px-8">
-          <div className="mx-auto shrink-0 max-w-2xl text-center">
-            <Badge variant="secondary" className="rounded-full border border-primary/20 bg-primary/10 text-primary">
-              Our team
-            </Badge>
-            <h2 className="mt-2 text-xl font-semibold tracking-tight text-foreground sm:mt-4 sm:text-3xl md:text-5xl">
-              Leadership driving innovation
-            </h2>
-          </div>
-          <div className="mt-3 flex min-h-0 flex-1 justify-center sm:mt-8 md:mt-10">
-            <CircularTestimonials
-              testimonials={teamCircularTestimonials}
-              autoplay
-              colors={{
-                name: "var(--foreground)",
-                designation: "var(--primary)",
-                testimony: "var(--muted-foreground)",
-                arrowBackground: "var(--primary)",
-                arrowForeground: "var(--primary-foreground)",
-                arrowHoverBackground: "var(--chart-3)",
-              }}
-              className="w-full max-w-6xl"
-            />
-          </div>
-        </div>
-      </HomeSectionBand>
+      {/* Shipped team section to its own standalone page /team */}
 
       <HomeSectionBand variant="neutral" id="case-studies">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
