@@ -82,16 +82,58 @@ export function HeroGlobeScene({ className, ...props }: HeroGlobeSceneProps) {
     )
     group.add(wireGlobe)
 
-    const ringCount = 4
-    for (let i = 0; i < ringCount; i++) {
-      const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(globeRadius + 0.15 + i * 0.18, 0.012, 8, 120),
-        new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.5 - i * 0.08 })
-      )
-      ring.rotation.x = Math.PI / 2 + (i * Math.PI) / 8
-      ring.rotation.z = (i * Math.PI) / 5
-      group.add(ring)
+    // Two bold elliptical orbital axis rings — globe is centred between both outer axes
+    // orbitRadius: distance from globe centre to ring centre-line
+    // tubeRadius: thickness of the ring (bold)
+    // Each ring is scaled on Y to make it elliptical — bulge is near the globe, tips are wider
+    const orbitRadius = globeRadius + 1.0   // gap between globe surface and ring inner edge = 1.0
+    const tubeRadius = 0.055               // bold ring tube
+
+    // Helper: create one elliptical orbital ring
+    const makeOrbit = (
+      tiltX: number,
+      tiltZ: number,
+      ellipseScaleY: number,
+      opacity: number,
+      color: THREE.Color
+    ) => {
+      const geo = new THREE.TorusGeometry(orbitRadius, tubeRadius, 20, 160)
+      const mat = new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.5,
+        metalness: 0.3,
+        roughness: 0.3,
+        transparent: true,
+        opacity,
+      })
+      const mesh = new THREE.Mesh(geo, mat)
+      // Scale Y < 1 makes it elliptical — the short axis is near the globe (bulge inward)
+      mesh.scale.set(1, ellipseScaleY, 1)
+      mesh.rotation.x = tiltX
+      mesh.rotation.z = tiltZ
+      return mesh
     }
+
+    // Orbit 1: tilted ~30° from vertical (XZ plane), leans left
+    const orbit1 = makeOrbit(Math.PI / 2, Math.PI / 6, 0.72, 0.85, primary)
+    group.add(orbit1)
+
+    // Orbit 2: tilted ~30° the other way (mirror), leans right
+    const orbit2 = makeOrbit(Math.PI / 2, -Math.PI / 6, 0.72, 0.75, accent)
+    group.add(orbit2)
+
+    // Subtle inner glow rings at globe surface for visual continuity
+    const glowGeo = new THREE.TorusGeometry(globeRadius + 0.08, 0.018, 12, 120)
+    const glowMat = new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.3 })
+    const glow1 = new THREE.Mesh(glowGeo, glowMat)
+    glow1.rotation.x = Math.PI / 2
+    glow1.rotation.z = Math.PI / 6
+    group.add(glow1)
+    const glow2 = new THREE.Mesh(glowGeo.clone(), glowMat.clone())
+    glow2.rotation.x = Math.PI / 2
+    glow2.rotation.z = -Math.PI / 6
+    group.add(glow2)
 
     const arcCount = 6
     const arcs: { line: THREE.Line; progress: number; speed: number; phase: number }[] = []
@@ -145,16 +187,21 @@ export function HeroGlobeScene({ className, ...props }: HeroGlobeSceneProps) {
       animationId = requestAnimationFrame(animate)
       scrollY += (targetScrollY - scrollY) * 0.08
       const factor = scrollY * 0.001
+      const t = performance.now()
 
-      group.rotation.y = factor + performance.now() * 0.00018
+      group.rotation.y = factor + t * 0.00018
       group.rotation.x = Math.sin(factor * 0.4) * 0.3
       wireGlobe.rotation.copy(group.rotation)
+
+      // Orbital axes spin independently (relative to the group) at different speeds
+      orbit1.rotation.z = Math.PI / 6 + t * 0.00045
+      orbit2.rotation.z = -Math.PI / 6 - t * 0.00032
 
       const scale = 1 + Math.min(scrollY * 0.0003, 0.45)
       group.scale.setScalar(scale)
 
       arcs.forEach(({ line, progress, speed, phase }) => {
-        const p = (progress + performance.now() * speed) % 1
+        const p = (progress + t * speed) % 1
         const mat = line.material as THREE.LineBasicMaterial
         mat.opacity = 0.25 + Math.sin(p * Math.PI) * 0.7
         line.scale.setScalar(0.95 + Math.sin(p * Math.PI + phase) * 0.05)
