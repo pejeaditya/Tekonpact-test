@@ -1,6 +1,5 @@
 import { SiteFooter } from "@/components/layout/SiteFooter"
 import { SiteHeader } from "@/components/layout/SiteHeader"
-import { PageParticles } from "@/components/ui/page-particles"
 import { Badge } from "@/components/ui/badge"
 import { teamMembers } from "@/lib/content"
 import { motion } from "motion/react"
@@ -8,10 +7,6 @@ import { motion } from "motion/react"
 export function TeamPage() {
   return (
     <div className="relative min-h-screen w-full bg-transparent text-foreground overflow-hidden">
-      {/* 3D Floating Particles Background */}
-      <div className="pointer-events-none fixed inset-0 z-0">
-        <PageParticles />
-      </div>
 
       {/* Perspective grid overlay at the top (styled for the dark neon theme) */}
       <div 

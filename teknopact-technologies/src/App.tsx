@@ -17,6 +17,8 @@ const CaseStudyDetailPage = lazy(() =>
 )
 const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })))
 
+import { PageParticles } from "@/components/ui/page-particles"
+
 /** Mount a single global IntersectionObserver that fires text animations
  *  on every [data-animate] element across all pages.
  *  A MutationObserver watches for new elements added by lazy-loaded routes.
@@ -59,6 +61,9 @@ function App() {
     <>
       <ScrollToHash />
       <RoutePrefetch />
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <PageParticles />
+      </div>
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
