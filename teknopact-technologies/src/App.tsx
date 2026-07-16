@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import { PageLoader } from "@/components/page-loader"
@@ -16,7 +16,44 @@ const CaseStudyDetailPage = lazy(() =>
   import("@/pages/CaseStudyDetailPage").then((m) => ({ default: m.CaseStudyDetailPage }))
 )
 
+/** Mount a single global IntersectionObserver that fires text animations
+ *  on every [data-animate] element across all pages.
+ *  A MutationObserver watches for new elements added by lazy-loaded routes.
+ */
+function useTextAnimations() {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible")
+            io.unobserve(entry.target) // fire once
+          }
+        })
+      },
+      { threshold: 0.12 }
+    )
+
+    const observe = () => {
+      document.querySelectorAll("[data-animate]:not(.is-visible)").forEach((el) => io.observe(el))
+    }
+
+    observe()
+
+    // Watch for DOM additions (lazy-loaded page content)
+    const mo = new MutationObserver(observe)
+    mo.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      io.disconnect()
+      mo.disconnect()
+    }
+  }, [])
+}
+
 function App() {
+  useTextAnimations()
+
   return (
     <>
       <ScrollToHash />

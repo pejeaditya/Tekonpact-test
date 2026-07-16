@@ -135,16 +135,16 @@ export function ProductsShowcase({
           aria-hidden
         />
         <div className="relative mx-auto w-full max-w-7xl px-6 py-14 text-center sm:px-10 sm:py-20 lg:px-12">
-          <p className="text-sm text-primary">
+          <p className="text-sm text-primary" data-animate="fade-in">
             {mode === "products" ? "Enterprise product catalog" : "End-to-end service offerings"}
           </p>
-          <h1 className="mx-auto mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mx-auto mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl" data-animate="letter-expand" data-delay="1">
             {copy.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-foreground/80 sm:text-lg sm:leading-8">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-foreground/80 sm:text-lg sm:leading-8" data-animate="fade-up" data-delay="2">
             {copy.intro.headline}
           </p>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7" data-animate="fade-up" data-delay="3">
             {copy.intro.body}
           </p>
 

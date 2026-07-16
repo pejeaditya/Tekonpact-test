@@ -93,9 +93,9 @@ export function ProductsShowcaseSlider({
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-sm font-semibold tracking-wide uppercase text-primary">{badge}</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{heading}</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{subtitle}</p>
+          <p className="text-sm font-semibold tracking-wide uppercase text-primary" data-animate="fade-in">{badge}</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl" data-animate="letter-expand" data-delay="1">{heading}</h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground" data-animate="fade-up" data-delay="2">{subtitle}</p>
 
           <nav className="mt-8 space-y-2" aria-label="Service clusters">
             {clusters.map((cluster, index) => (

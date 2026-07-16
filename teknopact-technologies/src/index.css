@@ -29,7 +29,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Lato", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Light mode (default) — Teknopact corporate blue / navy */
@@ -108,7 +108,7 @@ body {
     radial-gradient(circle at 50% 100%, color-mix(in oklch, var(--primary) 6%, transparent), transparent 36rem),
     var(--background);
   color: var(--foreground);
-  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Lato", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -152,6 +152,100 @@ body {
   .animate-teknopact-marquee {
     animation: none;
   }
+}
+
+/* =====================================================
+   GLOBAL TEXT ANIMATIONS
+   Elements with data-animate attribute are revealed
+   when they enter the viewport via IntersectionObserver
+   (mounted in App.tsx). Each variant has a distinct
+   entrance motion tied to Lato's clean letterforms.
+   ===================================================== */
+
+/* --- Keyframes --- */
+@keyframes txt-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes txt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes txt-slide-left {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes txt-slide-right {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes txt-scale-up {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes txt-letter-expand {
+  from { opacity: 0; letter-spacing: -0.06em; }
+  to   { opacity: 1; letter-spacing: inherit; }
+}
+
+@keyframes txt-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* --- Base state: hidden until IntersectionObserver adds .is-visible --- */
+[data-animate] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+[data-animate].is-visible {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Variants --- */
+[data-animate="fade-up"].is-visible       { animation: txt-fade-up      0.7s both; }
+[data-animate="fade-in"].is-visible       { animation: txt-fade-in      0.6s both; }
+[data-animate="slide-left"].is-visible    { animation: txt-slide-left   0.65s both; }
+[data-animate="slide-right"].is-visible   { animation: txt-slide-right  0.65s both; }
+[data-animate="scale-up"].is-visible      { animation: txt-scale-up     0.6s both; }
+[data-animate="letter-expand"].is-visible { animation: txt-letter-expand 0.75s both; }
+
+/* --- Staggered delay helpers (add data-delay="1"…"6" alongside data-animate) --- */
+[data-delay="1"] { animation-delay: 0.08s !important; }
+[data-delay="2"] { animation-delay: 0.16s !important; }
+[data-delay="3"] { animation-delay: 0.24s !important; }
+[data-delay="4"] { animation-delay: 0.32s !important; }
+[data-delay="5"] { animation-delay: 0.40s !important; }
+[data-delay="6"] { animation-delay: 0.50s !important; }
+
+/* --- Shimmer gradient on hero titles (always on, no observer needed) --- */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--foreground)  0%,
+    var(--primary)    40%,
+    var(--foreground) 60%,
+    var(--foreground) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: txt-shimmer 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate]           { opacity: 1; }
+  [data-animate].is-visible { animation: none; }
+  .text-shimmer            { animation: none; }
+  .animate-teknopact-marquee { animation: none; }
 }
 
 .teknopact-scrollbar {
