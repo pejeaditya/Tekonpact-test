@@ -107,7 +107,7 @@ export function HeroSection() {
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.55,
-        ease: [0.25, 0.1, 0.25, 1.0],
+        ease: [0.25, 0.1, 0.25, 1.0] as any,
       },
     },
   }

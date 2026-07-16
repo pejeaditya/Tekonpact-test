@@ -124,7 +124,7 @@ export function ProductsShowcase({
   const hasMore = visibleCount < filteredItems.length
 
   return (
-    <div ref={containerRef} className="min-h-screen w-full bg-background">
+    <div ref={containerRef} className="min-h-screen w-full bg-transparent">
       <section className="relative overflow-hidden">
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"
@@ -318,7 +318,7 @@ function ShowcaseItemDetail({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-background"
+      className="fixed inset-0 z-50 overflow-y-auto bg-background/90 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-labelledby="showcase-detail-title"

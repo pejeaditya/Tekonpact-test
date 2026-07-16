@@ -65,7 +65,7 @@ export function HeroParallaxHeader({
 }
 
 export function HeroParallax({
-  products,
+  products: _products,
   header,
   className,
 }: {
@@ -73,9 +73,9 @@ export function HeroParallax({
   header?: React.ReactNode
   className?: string
 }) {
-  const firstRow = products.slice(0, 5)
-  const secondRow = products.slice(5, 10)
-  const thirdRow = products.slice(10, 15)
+  // const firstRow = products.slice(0, 5)
+  // const secondRow = products.slice(5, 10)
+  // const thirdRow = products.slice(10, 15)
   const ref = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -84,14 +84,14 @@ export function HeroParallax({
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 }
 
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 1000]),
-    springConfig
-  )
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -1000]),
-    springConfig
-  )
+  // const translateX = useSpring(
+  //   useTransform(scrollYProgress, [0, 1], [0, 1000]),
+  //   springConfig
+  // )
+  // const translateXReverse = useSpring(
+  //   useTransform(scrollYProgress, [0, 1], [0, -1000]),
+  //   springConfig
+  // )
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
     springConfig

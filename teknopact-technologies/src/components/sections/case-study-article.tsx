@@ -68,7 +68,7 @@ export function CaseStudyArticle({
   }, [study.sections])
 
   return (
-    <article className="w-full bg-background">
+    <article className="w-full bg-transparent">
       <header className="mx-auto w-full max-w-7xl px-6 pt-8 pb-8 sm:px-10 sm:pt-12 lg:px-12">
         <Button
           variant="outline"

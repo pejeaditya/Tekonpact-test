@@ -62,7 +62,7 @@ export function CaseStudiesShowcase({
   const hasMore = visibleCount < filteredStudies.length
 
   return (
-    <div className="w-full bg-background">
+    <div className="w-full bg-transparent">
       <section className="relative overflow-hidden">
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklch,var(--primary)_34%,transparent),transparent_28rem),linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"

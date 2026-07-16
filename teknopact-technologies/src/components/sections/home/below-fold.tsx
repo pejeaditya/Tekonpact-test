@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CircularTestimonials } from "@/components/ui/circular-testimonials"
-import { IndustriesShowcase } from "@/components/ui/industries-showcase"
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion"
 import { LogoMarquee } from "@/components/ui/logo-marquee"
 import { OfferingsCarousel } from "@/components/ui/offerings-carousel"
@@ -22,7 +21,6 @@ import {
   faqs,
   keyClientLogos,
   presenceMapDots,
-  sectorFocus,
   serviceClusters,
   teamCircularTestimonials,
   whyTeknopactAccordionItems,
@@ -69,6 +67,16 @@ const offerings = [
     ],
     cta: "See details",
     href: "/products",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&h=500&q=80",
+    theme: {
+      accent: "text-[#00b4d8] group-hover:text-[#0096c7]",
+      borderHover: "hover:border-[#00b4d8]/40",
+      shadowGlow: "0 20px 40px rgba(0, 180, 216, 0.15)",
+      badgeBg: "bg-[#00b4d8]/10 border-[#00b4d8]/30",
+      badgeText: "text-[#00b4d8]",
+      checkBg: "bg-[#00b4d8]/10 group-hover:bg-[#00b4d8]/20",
+      checkText: "text-[#00b4d8]",
+    },
   },
   {
     icon: Wrench,
@@ -82,6 +90,16 @@ const offerings = [
     ],
     cta: "See details",
     href: "/services",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&h=500&q=80",
+    theme: {
+      accent: "text-[#a2d2ff] group-hover:text-[#bde0fe]",
+      borderHover: "hover:border-[#a2d2ff]/40",
+      shadowGlow: "0 20px 40px rgba(162, 210, 255, 0.15)",
+      badgeBg: "bg-[#a2d2ff]/10 border-[#a2d2ff]/30",
+      badgeText: "text-[#a2d2ff]",
+      checkBg: "bg-[#a2d2ff]/10 group-hover:bg-[#a2d2ff]/20",
+      checkText: "text-[#a2d2ff]",
+    },
   },
   {
     icon: FileText,
@@ -95,10 +113,18 @@ const offerings = [
     ],
     cta: "See details",
     href: "/case-studies",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
+    theme: {
+      accent: "text-[#52b788] group-hover:text-[#40916c]",
+      borderHover: "hover:border-[#52b788]/40",
+      shadowGlow: "0 20px 40px rgba(82, 183, 136, 0.15)",
+      badgeBg: "bg-[#52b788]/10 border-[#52b788]/30",
+      badgeText: "text-[#52b788]",
+      checkBg: "bg-[#52b788]/10 group-hover:bg-[#52b788]/20",
+      checkText: "text-[#52b788]",
+    },
   },
 ]
-
-const sectorIndustries = sectorFocus.map((s) => ({ ...s }))
 
 export function HomeBelowFold() {
   return (

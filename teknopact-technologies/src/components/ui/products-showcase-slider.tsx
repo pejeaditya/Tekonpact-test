@@ -22,13 +22,13 @@ export interface ProductsShowcaseSliderProps {
 
 function ServiceCard({ service }: { service: ServiceSubItem }) {
   return (
-    <div className="group flex gap-3 rounded-xl border border-border bg-card/50 p-4 transition-all duration-300 hover:border-primary/20 hover:bg-accent/20">
-      <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-        <service.icon className="size-4" />
+    <div className="group flex gap-3.5 rounded-2xl border border-border/40 bg-card/30 p-4 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:bg-card/65 hover:shadow-[0_10px_25px_rgba(98,176,255,0.05)]">
+      <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/5 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_10px_rgba(98,176,255,0.3)]">
+        <service.icon className="size-4.5" />
       </span>
       <div>
-        <h4 className="text-sm font-semibold text-foreground">{service.title}</h4>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{service.description}</p>
+        <h4 className="text-sm font-bold text-foreground transition-colors duration-300 group-hover:text-primary">{service.title}</h4>
+        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">{service.description}</p>
       </div>
     </div>
   )
@@ -93,21 +93,21 @@ export function ProductsShowcaseSlider({
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-sm font-medium text-primary">{badge}</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">{heading}</h2>
+          <p className="text-sm font-semibold tracking-wide uppercase text-primary">{badge}</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{heading}</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{subtitle}</p>
 
-          <nav className="mt-8 space-y-1" aria-label="Service clusters">
+          <nav className="mt-8 space-y-2" aria-label="Service clusters">
             {clusters.map((cluster, index) => (
               <button
                 key={cluster.id}
                 type="button"
                 onClick={() => goTo(index)}
                 className={cn(
-                  "group relative flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-all duration-300",
+                  "group relative flex w-full items-center gap-4 px-5 py-4 text-left transition-all duration-300 rounded-xl",
                   index === activeIndex
-                    ? "border-l-2 border-primary bg-accent/40 text-foreground font-semibold"
-                    : "border-l-2 border-transparent text-muted-foreground hover:bg-accent/20 hover:text-foreground"
+                    ? "bg-primary/10 border border-primary/20 text-foreground font-bold shadow-md shadow-primary/5"
+                    : "border border-transparent text-muted-foreground hover:bg-accent/15 hover:text-foreground"
                 )}
               >
                 <cluster.icon
@@ -118,9 +118,9 @@ export function ProductsShowcaseSlider({
                 />
                 <span className="text-sm">{cluster.title}</span>
                 {interval > 0 && index === activeIndex && (
-                  <div className="ml-auto h-1 w-12 overflow-hidden rounded-full bg-border">
+                  <div className="ml-auto h-1.5 w-12 overflow-hidden rounded-full bg-primary/20">
                     <motion.div
-                      className="h-full rounded-full bg-primary"
+                      className="h-full rounded-full bg-gradient-to-r from-primary to-cyan-400 shadow-[0_0_8px_rgba(98,176,255,0.8)]"
                       animate={{ width: `${Math.min(progress, 100)}%` }}
                       transition={{ duration: 0.05, ease: "linear" }}
                     />
@@ -143,22 +143,22 @@ export function ProductsShowcaseSlider({
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl border border-border bg-card p-6 sm:p-8"
+              className="rounded-[2rem] border border-border/50 bg-card/45 backdrop-blur-md p-6 sm:p-8 shadow-2xl shadow-primary/5"
             >
-              <div className="mb-6 flex items-center gap-4">
-                <span className="grid size-14 place-items-center rounded-xl bg-primary/10 text-primary">
+              <div className="mb-8 flex items-start gap-4">
+                <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-primary/20 bg-primary/5 text-primary shadow-[0_0_15px_rgba(98,176,255,0.15)]">
                   <active.icon className="size-7" />
                 </span>
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">{active.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{active.summary}</p>
+                  <h3 className="text-2xl font-extrabold tracking-tight text-foreground">{active.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{active.summary}</p>
                 </div>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {active.services.map((service) => (
                   <ServiceCard key={service.id} service={service} />
                 ))}
